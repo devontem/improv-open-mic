@@ -29,18 +29,18 @@ module.exports = function(app, express){
 	var forumRouter = express.Router();
 
 	// routes
-	// app.use('/api/open-mics', openMicRouter);
-	// app.use('/api/users', userRouter);
+	app.use('/api/open-mics', openMicRouter);
+	app.use('/api/users', userRouter);
 	// app.use('/api/authenticate', authRouter);
 	app.use('/api/reviews', reviewsRouter);
 	app.use('/api/forum', forumRouter);
 
 	// initialize routes
-	// var openMicRoutes = require('../openMic/routes');
-	// openMicRouter(openMicRouter);
+	var openMicRoutes = require('../openMic/routes');
+	openMicRoutes(openMicRouter);
 
-	// var userRoutes = require('../users/routes');
-	// userRoutes(userRouter);
+	var userRoutes = require('../users/routes');
+	userRoutes(userRouter);
 
 	// var authRoutes = require('../auth/routes');
 	// authRoutes(authRouter);
