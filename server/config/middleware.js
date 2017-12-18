@@ -31,7 +31,7 @@ module.exports = function(app, express){
 	// routes
 	app.use('/api/open-mics', openMicRouter);
 	app.use('/api/users', userRouter);
-	// app.use('/api/authenticate', authRouter);
+	app.use('/api/authenticate', authRouter);
 	app.use('/api/reviews', reviewsRouter);
 	app.use('/api/forum', forumRouter);
 
@@ -42,8 +42,8 @@ module.exports = function(app, express){
 	var userRoutes = require('../users/routes');
 	userRoutes(userRouter);
 
-	// var authRoutes = require('../auth/routes');
-	// authRoutes(authRouter);
+	var authRoutes = require('../auth/routes');
+	authRoutes(authRouter);
 
 	var reviewsRoutes = require('../reviews/routes');
 	reviewsRoutes(reviewsRouter);
