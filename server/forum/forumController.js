@@ -5,12 +5,7 @@ module.exports.getForumPosts = function(req, res){
     database.then(function(connection){
         // query database 
     	connection.query('SELECT * FROM `forum_posts`', function(error, results, fields) {
-            if (error) {
-                console.log(error);
-                res.status(400).send({ data: error });
-                return;
-            }
-            console.log('results', results);
+            if (err) res.status(400).send({ data: error });
 
             res.status(200).send({ data: results });
         });
@@ -22,7 +17,7 @@ module.exports.getForumPostById = function(req, res){
 
     database.then(function(connection){
     	connection.query('SELECT * FROM `forum_posts` WHERE id = ' + id, function(err, forum_post, forum_post_fields) {
-            if (err) res.status(400).send({ data: error });
+            if (err) res.status(400).send({ data: err });
 
             connection.query('SELECT * FROM `forum_replies` WHERE `parent_post_id` = ' + id, function(error, forum_replies, fields) { 
             	if (error) res.status(400).send({ data: error });
@@ -54,9 +49,9 @@ module.exports.createPost = function(req, res){
 
 module.exports.deletePost = function(req, res){
 	var data = req.body;
-    // async connection to database
+
     database.then(function(connection){
-        // query database 
+
     	connection.query('INSERT INTO `A2_OPEN_MICS` SET ?', data , function(error, results, fields) {
             if (err) res.status(400).send({ data: error });
 
