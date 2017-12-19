@@ -1,4 +1,6 @@
 var database = require('./.../db/database');
+// add tags 
+// add likes
 
 module.exports.getOpenMics = function(req, res){
 	// query params 

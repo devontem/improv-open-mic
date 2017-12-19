@@ -44,7 +44,6 @@ module.exports.createPost = function(req, res){
             res.status(200).send({ data: results });
         });
     });
-
 }
 
 module.exports.deletePost = function(req, res){
