@@ -21,6 +21,16 @@ module.exports = function(app, express){
 	// parses json data on request
 	app.use(bodyParser.json());
 
+	var db = require('./../db/database');
+	app.get('/hi', function(req, res){
+		console.log('hitting /')
+		console.log(db)
+		db.then(function(connection){
+			console.log(connection);
+			res.send(connection.toString());
+		});
+	});
+
 	// routers
 	var openMicRouter = express.Router();
 	var userRouter = express.Router();
