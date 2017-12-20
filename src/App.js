@@ -1,21 +1,41 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import 'bootstrap-grid/dist/grid.min.css';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import IconButton from 'material-ui/IconButton';
+import AppBar from 'material-ui/AppBar';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import HappyFaceIcon from 'material-ui/svg-icons/social/sentiment-very-satisfied';
 
-class App extends Component {
+import Logged from './components/Logged';
+import Login from './components/Login';
+
+class App1 extends Component {
+  componentWillMount(){
+    this.state = {
+      logged: false
+    };
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <MuiThemeProvider>
+        <div>
+          <AppBar
+          title="Improv Jam Open Mics"
+          iconElementLeft={<IconButton><HappyFaceIcon /></IconButton>}
+          iconElementRight={this.state.logged ? <Logged /> : <Login />}
+          />
+
+          <div className="container">
+            <div className="col-sm-4"></div>
+            <div className="col-sm-8"></div>
+          </div>
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
 
-export default App;
+export default App1;
