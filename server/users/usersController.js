@@ -31,26 +31,27 @@ module.exports.createUser = function(req, res){
 }
 
 module.exports.editUser = function(req, res){
-	var data = req.body;
-	var changes = [ data['title'], 
-					data['venue_id'], 
-					data['day_of_week'], 
-					data['start_time'], 
-					data['end_time'], 
-					data['city'], 
-					data['country'], 
-					data['active'], 
-					data['id']];
+	// check if can be implemented with set case
+	// var data = req.body;
+	// var changes = [ data['title'], 
+	// 				data['venue_id'], 
+	// 				data['day_of_week'], 
+	// 				data['start_time'], 
+	// 				data['end_time'], 
+	// 				data['city'], 
+	// 				data['country'], 
+	// 				data['active'], 
+	// 				data['id']];
 
-    // async connection to database
-    database.then(function(connection){
-        // query database 
-    	connection.query('UPDATE `open_mics` SET title = ?, venue_id = ?, day_of_week = ?, start_time = ?, end_time = ?, city = ?, country = ?, active = ? WHERE id = ?', changes, function(error, results, fields) {
-            if (err) res.status(400).send({ data: error });
+ //    // async connection to database
+ //    database.then(function(connection){
+ //        // query database 
+ //    	connection.query('UPDATE `open_mics` SET title = ?, venue_id = ?, day_of_week = ?, start_time = ?, end_time = ?, city = ?, country = ?, active = ? WHERE id = ?', changes, function(error, results, fields) {
+ //            if (err) res.status(400).send({ data: error });
 
-            res.status(200).send({ data: results });
-        });
-    });
+ //            res.status(200).send({ data: results });
+ //        });
+ //    });
 }
 
 module.exports.searchUsers = function(req, res){
