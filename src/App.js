@@ -6,6 +6,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 
 import Layout from './components/Layout';
 import ForumContainer from './containers/ForumContainer';
+import NewForumPostContainer from './containers/NewForumPostContainer';
 
 const customHistory = createBrowserHistory();
 
@@ -21,7 +22,8 @@ class App extends Component {
         <Provider store={store}>
           <Router history={customHistory}>
             <Layout>
-              <Route path="/forum" component={ForumContainer} />
+              <Route exact path="/forum" component={ForumContainer} />
+              <Route path="/forum/new" component={NewForumPostContainer} />
             </Layout>
           </Router>
         </Provider>

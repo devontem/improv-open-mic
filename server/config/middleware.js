@@ -72,8 +72,7 @@ module.exports = function(app, express){
 	forumRoutes(forumRouter);
 
 	// render the react app
-	app.get('*', function(req, res){
-		console.log('file url', path.resolve(__dirname, '..', '..', 'build', 'index.html'))
+	app.get('/', function(req, res){
 		res.sendFile(path.resolve(__dirname, '..', '..', 'build', 'index.html'));
 	});
 }
