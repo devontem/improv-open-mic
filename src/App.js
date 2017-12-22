@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import 'bootstrap-grid/dist/grid.min.css';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { Route, IndexRoute, Router, Switch } from 'react-router-dom';
+import { Provider } from "react-redux";
+import store from "./containers/store";
+import createBrowserHistory from 'history/createBrowserHistory';
 
 import Layout from './components/Layout';
+import ForumContainer from './containers/ForumContainer';
 
-class App1 extends Component {
+const customHistory = createBrowserHistory();
+
+class App extends Component {
   componentWillMount(){
     this.state = {
       logged: false
@@ -15,11 +18,15 @@ class App1 extends Component {
 
   render() {
     return (
-      <MuiThemeProvider>
-          <Layout logged={this.state.logged} showMenu={true} />
-      </MuiThemeProvider>
+        <Provider store={store}>
+          <Router history={customHistory}>
+            <Layout>
+              <Route path="/forum" component={ForumContainer} />
+            </Layout>
+          </Router>
+        </Provider>
     );
   }
 }
 
-export default App1;
+export default App;
