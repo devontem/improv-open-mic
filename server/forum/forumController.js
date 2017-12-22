@@ -1,10 +1,10 @@
-var database = require('./.../db/database');
+var database = require('./../db/database');
 
 module.exports.getForumPosts = function(req, res){
     // async connection to database
     database.then(function(connection){
         // query database 
-    	connection.query('SELECT * FROM `forum_posts`', function(error, results, fields) {
+    	connection.query('SELECT * FROM `forum_posts`', function(err, results, fields) {
             if (err) res.status(400).send({ data: error });
 
             res.status(200).send({ data: results });
@@ -38,7 +38,7 @@ module.exports.createPost = function(req, res){
 
     database.then(function(connection){
 
-    	connection.query('INSERT INTO `forum_posts` SET ?', data , function(error, results, fields) {
+    	connection.query('INSERT INTO `forum_posts` SET ?', data , function(err, results, fields) {
             if (err) res.status(400).send({ data: error });
 
             res.status(200).send({ data: results });
@@ -51,7 +51,7 @@ module.exports.deletePost = function(req, res){
 
     database.then(function(connection){
 
-    	connection.query('INSERT INTO `A2_OPEN_MICS` SET ?', data , function(error, results, fields) {
+    	connection.query('INSERT INTO `A2_OPEN_MICS` SET ?', data , function(err, results, fields) {
             if (err) res.status(400).send({ data: error });
 
             res.status(200).send({ data: results });
@@ -65,7 +65,7 @@ module.exports.editPost = function(req, res){
  
     database.then(function(connection){
 
-    	connection.query('UPDATE `forum_posts` SET `title` = ?, `body` = ? WHERE id = ?', changes , function(error, results, fields) {
+    	connection.query('UPDATE `forum_posts` SET `title` = ?, `body` = ? WHERE id = ?', changes , function(err, results, fields) {
             if (err) res.status(400).send({ data: error });
 
             res.status(200).send({ data: results });
@@ -96,7 +96,7 @@ module.exports.createPostReply = function(req, res){
 
     database.then(function(connection){
 
-    	connection.query('INSERT INTO `forum_replies` SET ?', data , function(error, results, fields) {
+    	connection.query('INSERT INTO `forum_replies` SET ?', data , function(err, results, fields) {
             if (err) res.status(400).send({ data: error });
 
             res.status(200).send({ data: results });
@@ -109,7 +109,7 @@ module.exports.editPostReply = function(req, res){
 	var changes = [data.body, data.id];
 
     database.then(function(connection){ 
-    	connection.query('UPDATE `forum_replies` SET body = ? WHERE id = ?', changes, function(error, results, fields) {
+    	connection.query('UPDATE `forum_replies` SET body = ? WHERE id = ?', changes, function(err, results, fields) {
             if (err) res.status(400).send({ data: error });
 
             res.status(200).send({ data: results });

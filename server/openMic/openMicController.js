@@ -1,4 +1,4 @@
-var database = require('./.../db/database');
+var database = require('./../db/database');
 // add tags 
 // add likes
 

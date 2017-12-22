@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 8080;
 
 
 // initializing all of the middleware for the application

@@ -45,7 +45,7 @@ if (db_env === 'herts'){
 						host     : '127.0.0.1',
 						user     : keys.user,
 						password : keys.password, // stored in a file not in version management
-						database : '123',
+						database : keys.database,
 						stream   : stream
 					});
 
@@ -65,7 +65,7 @@ if (db_env === 'herts'){
 			  host: keys.host, // host on different server
 			  port: keys.port,
 			  username: keys.user,
-			  password: '123' // stored in a file not in version management
+			  password: keys.password // stored in a file not in version management
 			});
 		});
 }

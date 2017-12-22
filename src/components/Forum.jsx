@@ -23,6 +23,7 @@ class Forum extends Component {
 			        primaryText="Vacation itinerary"
 			        secondaryText="Jan 20, 2014"
 			      />
+			      <Divider inset={true}/>
 			      <ListItem
 			        leftAvatar={<Avatar icon={<EditorInsertChart />} backgroundColor={yellow600} />}
 			        rightIcon={<ActionInfo />}

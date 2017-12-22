@@ -1,4 +1,4 @@
-var database = require('./.../db/database');
+var database = require('./../db/database');
 var hashPassword = require('./../helpers/helpers').hashPassword;
 // add friends
 // add memberships

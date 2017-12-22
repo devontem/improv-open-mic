@@ -3,14 +3,34 @@ var bodyParser = require('body-parser');
 var config = require('./config');
 var promise = require('bluebird');
 var mongoose = require('mongoose');
+var path = require('path');
 
 module.exports = function(app, express){
+	// set headers to prevent CORS issue
+	app.use(function (req, res, next) {
+
+	    // Website you wish to allow to connect
+	    res.setHeader('Access-Control-Allow-Origin', '*');
+
+	    // Request methods you wish to allow
+	    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+	    // Request headers you wish to allow
+	    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+	    // Set to true if you need the website to include cookies in the requests sent
+	    // to the API (e.g. in case you use sessions)
+	    res.setHeader('Access-Control-Allow-Credentials', true);
+
+	    // Pass to next layer of middleware
+	    next();
+	});
 
 	// setting application variables
 	app.set('secret', config.secret);
 
 	// serving static files
-	app.use(express.static(__dirname + '/../../public'));
+	app.use(express.static(path.resolve(__dirname, '..', '..' , 'build')));
 
 	// colored/detailed server logs
 	app.use(morgan('dev'));
@@ -20,16 +40,6 @@ module.exports = function(app, express){
 
 	// parses json data on request
 	app.use(bodyParser.json());
-
-	var db = require('./../db/database');
-	app.get('/hi', function(req, res){
-		console.log('hitting /')
-		console.log(db)
-		db.then(function(connection){
-			console.log(connection);
-			res.send(connection.toString());
-		});
-	});
 
 	// routers
 	var openMicRouter = express.Router();
@@ -61,4 +71,9 @@ module.exports = function(app, express){
 	var forumRoutes = require('../forum/routes');
 	forumRoutes(forumRouter);
 
+	// render the react app
+	app.get('*', function(req, res){
+		console.log('file url', path.resolve(__dirname, '..', '..', 'build', 'index.html'))
+		res.sendFile(path.resolve(__dirname, '..', '..', 'build', 'index.html'));
+	});
 }

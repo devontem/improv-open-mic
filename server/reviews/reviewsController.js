@@ -1,4 +1,4 @@
-var database = require('./.../db/database');
+var database = require('./../db/database');
 
 module.exports.getReviews = function(req, res){
 	// add query param to get for a specific venue_id and for all (homepage)
