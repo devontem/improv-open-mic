@@ -1,9 +1,8 @@
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var config = require('./config');
-var promise = require('bluebird');
-var mongoose = require('mongoose');
 var path = require('path');
+var fileUpload = require('express-fileupload');
 
 module.exports = function(app, express){
 	// set headers to prevent CORS issue
@@ -27,6 +26,9 @@ module.exports = function(app, express){
 
 	// setting application variables
 	app.set('secret', config.secret);
+
+	// // file upload module
+	app.use(fileUpload());
 
 	// serving static files
 	app.use(express.static(path.resolve(__dirname, '..', '..' , 'build')));
