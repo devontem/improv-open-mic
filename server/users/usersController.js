@@ -7,13 +7,40 @@ module.exports.getUserById = function(req, res){
 	var id = req.params.id;
     // async connection to database
     database.then(function(connection){
-        // query database 
-    	connection.query('SELECT * FROM `users` WHERE id = ' + id, function(error, results, fields) {
+        // query database for user data
+    	connection.query('SELECT * FROM `users` WHERE id = ' + id, function(error, data, fields) {
             if (error) {
                 res.status(400).send({ data: error });
+                return;
             }
+            // querying database for who user is following
+            connection.query('SELECT * FROM `following` WHERE follower = ' + id, function(error1, following, fields1) {
+                if (error1) {
+                    res.status(400).send({ data: error1 });
+                    return;
+                }
+                // querying database for who is following user
+                connection.query('SELECT * FROM `following` WHERE followee = ' + id, function(error2, followers, fields2) {
+                    if (error2) {
+                        res.status(400).send({ data: error2 });
+                        return;
+                    }
+                    // querying database for users reviews
+                    connection.query('SELECT * FROM `reviews` WHERE author_id = ' + id, function(error3, reviews, fields3) {
+                        if (error3) {
+                            res.status(400).send({ data: error3 });
+                            return;
+                        }
 
-            res.status(200).send({ data: results[0] });
+                        res.status(200).send({ 
+                            data: data[0],
+                            followers: followers,
+                            following: following,
+                            reviews: reviews
+                        });
+                    });
+                });
+            });
         });
     });
 }

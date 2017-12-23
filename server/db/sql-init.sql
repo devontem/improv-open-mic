@@ -152,3 +152,13 @@ CREATE TABLE IF NOT EXISTS `open_mic_tag_maps` (
   FOREIGN KEY (`open_mic_id`) REFERENCES open_mics(id),
   FOREIGN KEY (`tag_id`) REFERENCES tags(id)
 );
+
+CREATE TABLE IF NOT EXISTS `following` (
+  `id` INT AUTO_INCREMENT,
+  `follower` INT,
+  `followee` INT,
+
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`follower`) REFERENCES users(`id`),
+  FOREIGN KEY (`followee`) REFERENCES users(`id`),
+);
