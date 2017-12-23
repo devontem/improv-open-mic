@@ -14,6 +14,11 @@ import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
+import ContentAddBox from 'material-ui/svg-icons/content/add-box';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
+
 
 const iconButtonElement = (
   <IconButton
@@ -39,20 +44,21 @@ class Forum extends Component {
 		return (
 			<div>
 				{this.props.forum.error && <Alert error={true} message={this.props.forum.errorMessage} />}
-
 				<Card>
 					<List>
-				      <Subheader inset={true}>Forum</Subheader>
-				      { this.props.forum.posts && this.props.forum.posts.map((item) => {
+				        <Subheader >Forum</Subheader>
+						<RaisedButton href="/forum/new" icon={<ContentAddBox />} label="Add New Post" primary={true} style={{margin: '0px 10px 10px 10px'}} />
+				      	{ this.props.forum.posts && this.props.forum.posts.map((item) => {
 				      		return (
 				      			<div key={item.id}>
-				      				<Divider inset={true}/>
+				      				<Divider/>
 				      				<ListItem
 								        leftAvatar={<Avatar icon={<ActionAssignment />} 
 								        backgroundColor={blue500} />}
 								        rightIcon={rightIconMenu}
 								        primaryText={item.title}
 								        secondaryText={new Date(item.date).toDateString()}
+								        href={`/forum/thread/${item.id}`}
 								    />
 				      			</div>
 				      		);

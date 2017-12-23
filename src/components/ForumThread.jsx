@@ -12,6 +12,8 @@ import MenuItem from 'material-ui/MenuItem';
 import Card, {CardTitle} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
 
 const secondaryText = (item) => {
 	return (<p>
@@ -52,7 +54,7 @@ class ForumThread extends Component {
 		return (
 			<div>
 				{this.props.forum.error && <Alert error={true} message={this.props.forum.errorMessage} />}
-
+				<FlatButton href="/forum" label="GO BACK" labelPosition="after" primary={true} icon={<HardwareKeyboardArrowLeft />}/>
 				{ this.props.forum.thread && this.props.forum.thread.forum_post && 
 					(<Card>
 						<CardTitle title={`Forum Post: ${this.props.forum.thread.forum_post.title}`} />
