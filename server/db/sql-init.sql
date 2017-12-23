@@ -6,7 +6,7 @@ use improvApp;
 
 CREATE TABLE IF NOT EXISTS `open_mics` (
   `id` INT AUTO_INCREMENT,
-  `title` VARCHAR(30),
+  `title` VARCHAR(50) DEFAULT NULL,
   `venue_id` INT DEFAULT NULL,
   `day_of_week` INT DEFAULT NULL,
   `start_time` VARCHAR(40) DEFAULT NULL,

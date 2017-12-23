@@ -9,7 +9,10 @@ module.exports.getOpenMics = function(req, res){
     database.then(function(connection){
         // query database 
     	connection.query('SELECT * FROM `open_mics`', function(error, results, fields) {
-            if (err) res.status(400).send({ data: error });
+            if (error) {
+                res.status(400).send({ data: error });
+                return;
+            }
 
             res.status(200).send({ data: results });
         });
@@ -21,8 +24,11 @@ module.exports.searchOpenMics = function(req, res){
 	// async connection to database
     database.then(function(connection){
         // query database 
-    	connection.query('SELECT * FROM `open_mics` WHERE title LIKE %?%', [search], function(error, results, fields) {
-            if (err) res.status(400).send({ data: error });
+    	connection.query('SELECT * FROM `open_mics` WHERE title like %Mary%', function (error, results, fields) {
+            if (error) {
+                res.status(400).send({ data: error });
+                return;
+            }
 
             res.status(200).send({ data: results });
         });
@@ -35,8 +41,10 @@ module.exports.getOpenMicById = function(req, res){
     database.then(function(connection){
         // query database 
     	connection.query('SELECT * FROM `open_mics` WHERE id = ' + id, function(error, results, fields) {
-            if (err) res.status(400).send({ data: error });
-
+            if (error) {
+                res.status(400).send({ data: error });
+                return;
+            }
             res.status(200).send({ data: results });
         });
     });
@@ -48,7 +56,10 @@ module.exports.createOpenMic = function(req, res){
     database.then(function(connection){
         // query database 
     	connection.query('INSERT INTO `open_mics` SET ?', data, function(error, results, fields) {
-            if (err) res.status(400).send({ data: error });
+            if (error) {
+                res.status(400).send({ data: error });
+                return;
+            }
 
             res.status(200).send({ data: results });
         });
@@ -71,7 +82,10 @@ module.exports.editOpenMic = function(req, res){
     database.then(function(connection){
         // query database 
     	connection.query('UPDATE `open_mics` SET title = ?, venue_id = ?, day_of_week = ?, start_time = ?, end_time = ?, city = ?, country = ?, active = ? WHERE id = ?', changes, function(error, results, fields) {
-            if (err) res.status(400).send({ data: error });
+            if (error) {
+                res.status(400).send({ data: error });
+                return;
+            }
 
             res.status(200).send({ data: results });
         });
@@ -84,7 +98,10 @@ module.exports.deleteOpenMic = function(req, res){
     database.then(function(connection){
         // query database 
     	connection.query('DELETE FROM `open_mics` WHERE id = ' + id , function(error, results, fields) {
-            if (err) res.status(400).send({ data: error });
+            if (error) {
+                res.status(400).send({ data: error });
+                return;
+            }
 
             res.status(200).send({ data: results });
         });
