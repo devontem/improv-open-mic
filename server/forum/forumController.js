@@ -8,8 +8,10 @@ module.exports.getForumPosts = function(req, res){
             if (err) res.status(400).send({ data: err });
 
             res.status(200).send({ data: results });
-        }).catch(function(err){ return res.status(400).send({ data: err }); });
-    }).catch(function(err){ return res.status(400).send({ data: err }); });
+        });
+    }).catch(catchErrors);
+
+    function catchErrors(err){ res.status(400).send({ data: err }); return; }
 }
 
 module.exports.getForumPostById = function(req, res){
@@ -30,9 +32,11 @@ module.exports.getForumPostById = function(req, res){
             			forum_post: forum_post[0] || {},
             			forum_replies: forum_replies
             		}
-            	}).catch(function(err){ return res.status(400).send({ data: err }); });
-            }).catch(function(err){ return res.status(400).send({ data: err }); });
-        }).catch(function(err){ return res.status(400).send({ data: err }); });
+            	});
+            });
+        }).catch(catchErrors);
+
+        function catchErrors(err){ res.status(400).send({ data: err }); return; }
     });
 }
 
@@ -46,8 +50,10 @@ module.exports.createPost = function(req, res){
             if (err) res.status(400).send({ data: err });
 
             res.status(200).send({ data: results });
-        }).catch(function(err){ return res.status(400).send({ data: err }); });
-    });
+        });
+    }).catch(catchErrors);
+
+    function catchErrors(err){ res.status(400).send({ data: err }); return; }
 }
 
 module.exports.deletePost = function(req, res){
@@ -60,7 +66,9 @@ module.exports.deletePost = function(req, res){
 
             res.status(200).send({ data: results });
         });
-    }).catch(function(err){ return res.status(400).send({ data: err }); });
+    }).catch(catchErrors);
+
+    function catchErrors(err){ res.status(400).send({ data: err }); return; }
 }
 
 module.exports.editPost = function(req, res){
@@ -74,7 +82,9 @@ module.exports.editPost = function(req, res){
 
             res.status(200).send({ data: results });
         });
-    }).catch(function(err){ return res.status(400).send({ data: err }); });
+    }).catch(catchErrors);
+
+    function catchErrors(err){ res.status(400).send({ data: err }); return; }
 }
 
 // module.exports.likePost = function(req, res){
@@ -111,7 +121,9 @@ module.exports.createPostReply = function(req, res){
 
             res.status(200).send({ data: results });
         });
-    }).catch(function(err){ return res.status(400).send({ data: err }); });
+    }).catch(catchErrors);
+
+    function catchErrors(err){ res.status(400).send({ data: err }); return; }
 }
 
 module.exports.editPostReply = function(req, res){
@@ -124,5 +136,7 @@ module.exports.editPostReply = function(req, res){
 
             res.status(200).send({ data: results });
         });
-    }).catch(function(err){ return res.status(400).send({ data: err }); });
+    }).catch(catchErrors);
+
+    function catchErrors(err){ res.status(400).send({ data: err }); return; }
 }
