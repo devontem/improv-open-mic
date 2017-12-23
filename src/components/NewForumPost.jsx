@@ -5,6 +5,7 @@ import Subheader from 'material-ui/Subheader';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
+import { Redirect } from 'react-router-dom';
 
 class NewForumPost extends Component {
 	handleSubmit(e){
@@ -17,6 +18,8 @@ class NewForumPost extends Component {
 	}
 
 	render(){
+		if (this.props.forum.success) return (<Redirect to={`/forum/thread/${this.props.forum.createPost.insertId}`}/>)
+
 		return (
 			<div>
 				<FlatButton href="/forum" label="GO BACK" labelPosition="after" primary={true} icon={<HardwareKeyboardArrowLeft />}/>

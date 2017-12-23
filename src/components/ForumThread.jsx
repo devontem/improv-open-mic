@@ -64,6 +64,7 @@ class ForumThread extends Component {
 						  primaryText={this.props.forum.thread.forum_post.author_id}
 						  secondaryText={secondaryText(this.props.forum.thread.forum_post)}
 						  secondaryTextLines={2}
+						  rows={4}
 						  open={true}
 						  nestedItems={this.props.forum.thread.forum_replies.map(nestedItem)}
 						/>
