@@ -5,44 +5,48 @@ module.exports.getForumPosts = function(req, res){
     database.then(function(connection){
         // query database 
     	connection.query('SELECT * FROM `forum_posts`', function(err, results, fields) {
-            if (err) res.status(400).send({ data: error });
+            if (err) res.status(400).send({ data: err });
 
             res.status(200).send({ data: results });
-        });
-    });
+        }).catch(function(err){ return res.status(400).send({ data: err }); });
+    }).catch(function(err){ return res.status(400).send({ data: err }); });
 }
 
 module.exports.getForumPostById = function(req, res){
-	var id = req.body.id;
+	var id = req.params.id;
 
     database.then(function(connection){
     	connection.query('SELECT * FROM `forum_posts` WHERE id = ' + id, function(err, forum_post, forum_post_fields) {
-            if (err) res.status(400).send({ data: err });
+            if (err) {
+                res.status(400).send({ data: err });
+                return;
+            }
 
             connection.query('SELECT * FROM `forum_replies` WHERE `parent_post_id` = ' + id, function(error, forum_replies, fields) { 
             	if (error) res.status(400).send({ data: error });
 
             	res.status(200).send({ 
             		data: {
-            			forum_post: forum_post,
+            			forum_post: forum_post[0] || {},
             			forum_replies: forum_replies
             		}
-            	});
-            });
-        });
+            	}).catch(function(err){ return res.status(400).send({ data: err }); });
+            }).catch(function(err){ return res.status(400).send({ data: err }); });
+        }).catch(function(err){ return res.status(400).send({ data: err }); });
     });
 }
 
 module.exports.createPost = function(req, res){
 	var data = req.body;
+    data.date = new Date();
 
     database.then(function(connection){
 
     	connection.query('INSERT INTO `forum_posts` SET ?', data , function(err, results, fields) {
-            if (err) res.status(400).send({ data: error });
+            if (err) res.status(400).send({ data: err });
 
             res.status(200).send({ data: results });
-        });
+        }).catch(function(err){ return res.status(400).send({ data: err }); });
     });
 }
 
@@ -52,11 +56,11 @@ module.exports.deletePost = function(req, res){
     database.then(function(connection){
 
     	connection.query('INSERT INTO `A2_OPEN_MICS` SET ?', data , function(err, results, fields) {
-            if (err) res.status(400).send({ data: error });
+            if (err) res.status(400).send({ data: err });
 
             res.status(200).send({ data: results });
         });
-    });
+    }).catch(function(err){ return res.status(400).send({ data: err }); });
 }
 
 module.exports.editPost = function(req, res){
@@ -66,11 +70,11 @@ module.exports.editPost = function(req, res){
     database.then(function(connection){
 
     	connection.query('UPDATE `forum_posts` SET `title` = ?, `body` = ? WHERE id = ?', changes , function(err, results, fields) {
-            if (err) res.status(400).send({ data: error });
+            if (err) res.status(400).send({ data: err });
 
             res.status(200).send({ data: results });
         });
-    });
+    }).catch(function(err){ return res.status(400).send({ data: err }); });
 }
 
 // module.exports.likePost = function(req, res){
@@ -94,14 +98,20 @@ module.exports.editPost = function(req, res){
 module.exports.createPostReply = function(req, res){
 	var data = req.body;
 
+    // handle type errors from frontend
+    if (typeof data.parent_post_id === 'string') data.parent_post_id = parseInt(data.parent_post_id);
+    data.date = new Date();
+    console.log(data);
+
     database.then(function(connection){
 
     	connection.query('INSERT INTO `forum_replies` SET ?', data , function(err, results, fields) {
-            if (err) res.status(400).send({ data: error });
+            console.log(err);
+            if (err) res.status(400).send({ data: err });
 
             res.status(200).send({ data: results });
         });
-    });
+    }).catch(function(err){ return res.status(400).send({ data: err }); });
 }
 
 module.exports.editPostReply = function(req, res){
@@ -110,9 +120,9 @@ module.exports.editPostReply = function(req, res){
 
     database.then(function(connection){ 
     	connection.query('UPDATE `forum_replies` SET body = ? WHERE id = ?', changes, function(err, results, fields) {
-            if (err) res.status(400).send({ data: error });
+            if (err) res.status(400).send({ data: err });
 
             res.status(200).send({ data: results });
         });
-    });
+    }).catch(function(err){ return res.status(400).send({ data: err }); });
 }

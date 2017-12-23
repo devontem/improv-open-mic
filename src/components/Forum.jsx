@@ -43,7 +43,7 @@ class Forum extends Component {
 				<Card>
 					<List>
 				      <Subheader inset={true}>Forum</Subheader>
-				      { this.props.forum.data && this.props.forum.data.map((item) => {
+				      { this.props.forum.posts && this.props.forum.posts.map((item) => {
 				      		return (
 				      			<div key={item.id}>
 				      				<Divider inset={true}/>

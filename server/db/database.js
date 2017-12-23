@@ -53,6 +53,7 @@ if (db_env === 'herts'){
 					connection.connect(function(err){
 						if (err){
 							// send rejection promise on mysql error
+							console.log('Error:', err)
 							reject(err);
 						} else {
 							// send connection back in variable on success
@@ -67,6 +68,7 @@ if (db_env === 'herts'){
 			  username: keys.user,
 			  password: keys.password // stored in a file not in version management
 			});
+			
 		});
 }
 
