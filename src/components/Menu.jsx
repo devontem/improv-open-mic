@@ -14,6 +14,7 @@ import SocialPublic from 'material-ui/svg-icons/social/public';
 import SocialPeople from 'material-ui/svg-icons/social/people';
 import ActionStore from 'material-ui/svg-icons/action/store';
 import ActionViewModule from 'material-ui/svg-icons/action/view-module';
+import ActionAccessibility from 'material-ui/svg-icons/action/accessibility';
 import Divider from 'material-ui/Divider';
 
 
@@ -29,13 +30,14 @@ const Menu = (props) => {
 		      			leftIcon={<ActionStore />} 
 		      			nestedItems={[
 		      					<ListItem primaryText="Search" href="/search" leftIcon={<ActionSearch />} />,
-		      					<ListItem primaryText="Tags" leftIcon={<ActionViewModule />} />,
-		      					<ListItem primaryText="Countries" leftIcon={<SocialPublic />} />,
+		      					<ListItem primaryText="All Jams" href="/jams" leftIcon={<ActionAccessibility />} />,
+		      					<ListItem primaryText="Tags" href="/tags"  leftIcon={<ActionViewModule />} />,
+		      					<ListItem primaryText="Countries" href="/jams?country=true" leftIcon={<SocialPublic />} />,
 		      				]}/>
 		      <ListItem primaryText="Forum" href="/forum" leftIcon={<CommunicationForum />} />
 		      <Divider />
-		      <ListItem primaryText="Add Jam" leftIcon={<ContentAddCircle />} />
-		      <ListItem primaryText="Add Review" leftIcon={<ActionNoteAdd />} />
+		      <ListItem primaryText="Add Jam" href="/jams/new" leftIcon={<ContentAddCircle />} />
+		      <ListItem primaryText="Add Review" href="/reviews/new" leftIcon={<ActionNoteAdd />} />
 		    </List>
 
 		    { (props.loggedIn) ?

@@ -25,9 +25,7 @@ module.exports.checkPassword = function(password, database_hash){
 module.exports.uploadImages = function(req){
 
 	return new Promise(function(resolve, reject){
-		console.log('req.files');
 		if (!req.files){
-			console.log('failing in req.files')
 	        reject(null);
 	    }
 
@@ -37,7 +35,7 @@ module.exports.uploadImages = function(req){
 	    var destination_path = '/image_uploads/' + file_name;
 
 	    // Use the mv() method to place the file somewhere on your server
-	    file.mv('./build' + destination_path, function(err) {
+	    file.mv('./public' + destination_path, function(err) {
 	        if (err)
 	          reject(null);
 

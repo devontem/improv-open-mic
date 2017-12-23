@@ -34,7 +34,6 @@ class CreateReview extends Component {
 		this.setState({
 			files
 		});
-		console.log(this.state.files);
 	}
 
 	render(){
@@ -63,14 +62,14 @@ class CreateReview extends Component {
 						      rowsMax={6}
 						      fullWidth={true}
 						    />
-						    <h3>Add Images</h3>
+						    <h3>Add One (1) Review Image</h3>
 						    <section>
 						        <div className="dropzone">
 						          <Dropzone
 						            accept="image/jpeg, image/png"
 						            onDrop={(accepted, rejected) => { this.setState({ accepted, rejected }); }}
 						          >
-						            <p>Try dropping some files here, or click to select files to upload.</p>
+						            <p>Drop your image here, or click to select image to upload.</p>
 						            <p>Only *.jpeg and *.png images will be accepted</p>
 						          </Dropzone>
 						        </div>

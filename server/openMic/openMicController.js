@@ -36,7 +36,7 @@ module.exports.searchOpenMics = function(req, res){
 }
 
 module.exports.getOpenMicById = function(req, res){
-	var id = req.body.id;
+	var id = req.params.id;
 	// async connection to database
     database.then(function(connection){
         // query database 
@@ -45,13 +45,26 @@ module.exports.getOpenMicById = function(req, res){
                 res.status(400).send({ data: error });
                 return;
             }
-            res.status(200).send({ data: results });
+
+            connection.query('SELECT * FROM `reviews` WHERE open_mic_id = ' + id, function(err, reviews, reviews_fields) {
+                if (err) {
+                    res.status(400).send({ data: err });
+                    return;
+                }
+                res.status(200).send({
+                    jam: results[0],
+                    reviews: reviews 
+                });
+            });
         });
     });
 }
 
 module.exports.createOpenMic = function(req, res){
 	var data = req.body;
+
+    data.venue_id = parseInt(data.venue_id);
+    data.active = 1;
     // async connection to database
     database.then(function(connection){
         // query database 

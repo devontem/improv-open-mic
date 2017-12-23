@@ -4,14 +4,16 @@ var hashPassword = require('./../helpers/helpers').hashPassword;
 // add memberships
 
 module.exports.getUserById = function(req, res){
-	var data = req.body;
+	var id = req.params.id;
     // async connection to database
     database.then(function(connection){
         // query database 
-    	connection.query('SELECT * FROM `users` WHERE id = ' + id, function(err, results, fields) {
-            if (err) res.status(400).send({ data: err });
+    	connection.query('SELECT * FROM `users` WHERE id = ' + id, function(error, results, fields) {
+            if (error) {
+                res.status(400).send({ data: error });
+            }
 
-            res.status(200).send({ data: results });
+            res.status(200).send({ data: results[0] });
         });
     });
 }

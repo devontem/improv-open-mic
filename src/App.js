@@ -11,16 +11,10 @@ import ForumThreadContainer from './containers/ForumThreadContainer';
 import SearchPageContainer from './containers/SearchPageContainer';
 import CreateReviewContainer from './containers/CreateReviewContainer';
 import ReviewContainer from './containers/ReviewContainer';
-
-//<Route path="/reviews/new" component={CreateReviewContainer} />
-  // fields, drag and drop image, add tags, redirect to review page
-//<Route path="/reviews/:id" component={ReviewContainer} />
-  // show review, image, tags, link to go to jam page
-
-//<Route path="/jam/new" component={CreateJamContainer} />
-  // jam details
-//<Route path="/jam/:id" component={JamPageContainer} />
-  // show all reviews for jam, show some quick stats (city, location, end start, etc), all the images for the jam
+import CreateJamContainer from './containers/CreateJamContainer';
+import JamPageContainer from './containers/JamPageContainer';
+import JamViewContainer from './containers/JamViewContainer';
+import ProfileContainer from './containers/ProfileContainer';
 
 //<Route path="/login" component={LoginContainer} />
   // login and sign up --> auth in backend and front end -- commenting, editing profile, creating reviews/jams
@@ -59,7 +53,14 @@ class App extends Component {
               <Route exact path="/search" component={SearchPageContainer} />
 
               <Route exact path="/reviews/new" component={CreateReviewContainer} />
-              <Route exact path="/reviews/:id" component={ReviewContainer} />
+              <Route exact path="/reviews/id/:id" component={ReviewContainer} />
+
+              <Route exact path="/jams" component={JamViewContainer} />
+              <Route exact path="/jams/new" component={CreateJamContainer} />
+              <Route exact path="/jams/id/:id" component={JamPageContainer} />
+              <Route exact path="/countries" component={JamPageContainer}  />
+
+              <Route exact path="/profile/:id" component={ProfileContainer}  />
             </Layout>
           </Router>
         </Provider>

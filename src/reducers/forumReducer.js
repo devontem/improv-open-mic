@@ -16,12 +16,12 @@ const forumReducer = (state = {}, action) => {
 		case 'CREATE_FORUM_POST':
 			return state;
 		case 'CREATE_FORUM_POST_PENDING':
-			return {...state, pending: true};
+			return {...state, pending: true, success: false};
 		case 'CREATE_FORUM_POST_FULFILLED':
 			return {...state, pending: false, createPost: action.payload.data.data, success: true };
 		case 'CREATE_FORUM_POST_REJECTED':
 			message = (action.payload.message) ? action.payload.message : 'An error has occured. Please try again later.';
-			return {...state, pending: false, error: true, errorMessage: message };
+			return {...state, pending: false, error: true, errorMessage: message, success: false };
 
 
 		case 'GET_THREAD_POST':

@@ -66,8 +66,8 @@ CREATE TABLE IF NOT EXISTS `reviews` (
   `id` INT AUTO_INCREMENT,
   `author_id` INT,
   `open_mic_id` INT,
-  `title` VARCHAR(40),
-  `photo` VARCHAR(50),
+  `title` VARCHAR(60),
+  `photo` VARCHAR(200),
   `body` TEXT,
   `date`, VARCHAR(40),
 

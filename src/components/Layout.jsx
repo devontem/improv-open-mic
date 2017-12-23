@@ -12,7 +12,6 @@ import Login from './Login';
 import Menu from './Menu';
 
 const Layout = (props) => {
-	console.log(props.children);
 	return (
 		<MuiThemeProvider>
 			<div>
