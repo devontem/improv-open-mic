@@ -18,24 +18,26 @@ module.exports.getReviews = function(req, res){
 }
 
 module.exports.getReviewById = function(req, res){
-	var id = req.body.id;
+	var id = req.params.id;
 
     database.then(function(connection){
     	connection.query('SELECT * FROM `reviews` WHERE id = ' + id, function(err, review, review_fields) {
             if (err) {
                 res.status(400).send({ data: err });
+                console.log('first error', err)
                 return;
             }
 
             connection.query('SELECT * FROM `review_comments` WHERE `review_id` = ' + id, function(error, review_replies, fields) { 
             if (error) {
                 res.status(400).send({ data: error });
+                console.log('second error', error)
                 return;
             }
 
             	res.status(200).send({ 
             		data: {
-            			review: review,
+            			review: review[0],
             			review_replies: review_replies
             		}
             	});

@@ -10,6 +10,7 @@ import NewForumPostContainer from './containers/NewForumPostContainer';
 import ForumThreadContainer from './containers/ForumThreadContainer';
 import SearchPageContainer from './containers/SearchPageContainer';
 import CreateReviewContainer from './containers/CreateReviewContainer';
+import ReviewContainer from './containers/ReviewContainer';
 
 //<Route path="/reviews/new" component={CreateReviewContainer} />
   // fields, drag and drop image, add tags, redirect to review page
@@ -53,11 +54,12 @@ class App extends Component {
             <Layout>
               <Route exact path="/forum" component={ForumContainer} />
               <Route exact path="/forum/new" component={NewForumPostContainer} />
-              <Route path="/forum/thread/:id" component={ForumThreadContainer} />
+              <Route exact path="/forum/thread/:id" component={ForumThreadContainer} />
 
-              <Route path="/search" component={SearchPageContainer} />
+              <Route exact path="/search" component={SearchPageContainer} />
 
-              <Route path="/reviews/new" component={CreateReviewContainer} />
+              <Route exact path="/reviews/new" component={CreateReviewContainer} />
+              <Route exact path="/reviews/:id" component={ReviewContainer} />
             </Layout>
           </Router>
         </Provider>
