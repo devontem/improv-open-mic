@@ -71,6 +71,60 @@ module.exports.createUser = function(req, res){
 
 }
 
+module.exports.getFollowing = function (req, res) {
+    var id = req.params.id;
+    id = req.userId;
+
+    database.then(function(connection){
+        // query database 
+        connection.query('SELECT * FROM `following` WHERE follower = ' + id, function(error, results, fields) {
+            if (error) res.status(400).send({ data: error });
+
+            res.status(200).send({ data: results });
+        });
+    });
+};
+
+module.exports.followUser = function (req, res) {
+    var data = req.body;
+    console.log('data1',data);
+    data.followee = parseInt(data.followee);
+    data.follower = parseInt(req.userId);
+    console.log('data2',data)
+
+    database.then(function(connection){
+        // query database 
+        connection.query('INSERT INTO `following` SET ?', data, function(error, results, fields) {
+            if (error) {
+                console.log(error);
+                res.status(400).send({ data: error });
+                return;
+            }
+
+            res.status(200).send({ data: results });
+        });
+    });
+};
+
+module.exports.unfollowUser = function (req, res) {
+    var data = req.body;
+    data.followee = parseInt(data.followee);
+    data.follower = parseInt(req.userId);
+
+    database.then(function(connection){
+        // query database 
+        connection.query('DELETE FROM `following` WHERE follower = '+data.follower+' AND followee ='+data.followee, function(error, results, fields) {
+            if (error) {
+                console.log(error);
+                res.status(400).send({ data: error });
+                return;
+            }
+
+            res.status(200).send({ data: results });
+        });
+    });
+};
+
 module.exports.editUser = function(req, res){
 	// check if can be implemented with set case
 	// var data = req.body;

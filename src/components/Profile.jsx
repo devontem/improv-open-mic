@@ -28,12 +28,13 @@ import ProfileCard from './ProfileCard';
 class Profile extends Component {
 	render() {
 		var imgUrl = (this.props.review.review) ? this.props.review.review.photo : '';
+		var isFollowing = (this.props.user.following) ? this.props.user.following.map(item => item.followee).includes(parseInt(this.props.match.params.id)) : false;
 		return (
 			<div>
 				{this.props.review.error && <Alert error={true} message={this.props.review.errorMessage} />}
 
 				{ this.props.showAll &&
-					<ProfileCard {...this.props} /> }
+					<ProfileCard isFollowing={isFollowing} {...this.props} /> }
 
 				{ (this.props.followingView || this.props.showAll) &&
 					<FollowingCard {...this.props} /> }

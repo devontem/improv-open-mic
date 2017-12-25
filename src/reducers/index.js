@@ -5,6 +5,7 @@ import review from './reviewReducer';
 import profile from './profileReducer';
 import auth from './authReducer';
 import tags from './tagsReducer';
+import user from './userReducer';
 
 const reducers = combineReducers({
 	forum,
@@ -12,7 +13,8 @@ const reducers = combineReducers({
 	review,
 	profile,
 	auth,
-	tags
+	tags,
+	user
 });
 
 export default reducers;
