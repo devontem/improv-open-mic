@@ -14,19 +14,19 @@ module.exports.getUserById = function(req, res){
                 return;
             }
             // querying database for who user is following
-            connection.query('SELECT * FROM `following` WHERE follower = ' + id, function(error1, following, fields1) {
+            connection.query('SELECT * FROM users u INNER JOIN following ON following.followee = u.id  WHERE following.follower =' + id, function(error1, following, fields1) {
                 if (error1) {
                     res.status(400).send({ data: error1 });
                     return;
                 }
                 // querying database for who is following user
-                connection.query('SELECT * FROM `following` WHERE followee = ' + id, function(error2, followers, fields2) {
+                connection.query('SELECT * FROM users u INNER JOIN following ON following.follower = u.id  WHERE following.followee =' + id, function(error2, followers, fields2) {
                     if (error2) {
                         res.status(400).send({ data: error2 });
                         return;
                     }
                     // querying database for users reviews
-                    connection.query('SELECT * FROM `reviews` WHERE author_id = ' + id, function(error3, reviews, fields3) {
+                    connection.query('SELECT reviews.id, reviews.title as reviewTitle, reviews.photo, reviews.body, reviews.date, o.title as jamTitle FROM reviews r, open_mics o INNER JOIN reviews ON reviews.open_mic_id = o.id WHERE reviews.author_id =' + id +' group by reviews.id', function(error3, reviews, fields3) {
                         if (error3) {
                             res.status(400).send({ data: error3 });
                             return;
@@ -47,16 +47,28 @@ module.exports.getUserById = function(req, res){
 
 module.exports.createUser = function(req, res){
 	var data = req.body;
-	data.password = hashPassword(data.password); // hashing password for storage
 
-    database.then(function(connection){
-        // query database 
-    	connection.query('INSERT INTO `users` SET ?', data, function(error, results, fields) {
-            if (err) res.status(400).send({ data: err });
+    // upload image asynchronously
+    uploadImages(req).then(function(image_path){
 
-            res.status(200).send({ data: results });
+        // formatting fields
+        data.photo = image_path;
+        data.join_date = new Date();
+        data.password = hashPassword(data.password);
+        console.log('data',data);
+        database.then(function(connection){
+            // query database 
+        	connection.query('INSERT INTO `users` SET ?', data, function(error, results, fields) {
+                if (err) res.status(400).send({ data: err });
+
+                res.status(200).send({ data: results });
+            });
         });
+    })
+    .catch(function(){
+        res.status(400).send({error: 'Image upload failed, please try again or try another photo.'});
     });
+
 }
 
 module.exports.editUser = function(req, res){

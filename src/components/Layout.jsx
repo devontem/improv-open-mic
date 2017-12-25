@@ -18,14 +18,14 @@ const Layout = (props) => {
 				<AppBar
 				title="Improv Jam Open Mics"
 				iconElementLeft={<IconButton><HappyFaceIcon /></IconButton>}
-				iconElementRight={props.logged ? <Logged /> : <Login />}
+				iconElementRight={props.loggedIn ? <Logged /> : <Login />}
 				/>
 
 				<div className="container-fluid">
 
 					{ (props.showMenu || true) ?
 						<div style={{ marginTop: '30px' }}>
-							<div className="col-sm-3"><Menu /></div>
+							<div className="col-sm-3"><Menu loggedIn={props.loggedIn} /></div>
 							<div className="col-sm-9">{props.children}</div>
 						</div> :
 						<div>

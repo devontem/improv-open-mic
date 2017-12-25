@@ -18,6 +18,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import TextField from 'material-ui/TextField';
 
 const secondaryText = (item) => {
 	return (<p>
@@ -29,16 +30,29 @@ const secondaryText = (item) => {
 const nestedItem = (item) => {
 	return (
 			 <ListItem	key={item.id}
-	        			leftIcon={<Avatar src="images/ok-128.jpg" />} 
-	        			primaryText={item.author_id}
+	        			leftIcon={<Avatar  src={item.photo} />} 
+	        			primaryText={item.username}
+	        			href={`/profile/${item.author_id}`}
 	        			secondaryTextLines={2}
 	      				secondaryText={secondaryText(item)}/>
 	);
 }
 
 class Review extends Component {
+	onChange(e){
+
+	}
+	handleClick(e){
+		e.preventDefault();
+		this.props.submitComment({
+			author_id: 3,
+			review_id: this.props.match.params.id,
+			body: this.refs.body.getValue(),
+		});
+		this.refs.form.reset();
+	}
 	render() {
-		console.log(this.props.review.review);
+		console.log(this.props);
 		var imgUrl = (this.props.review.review) ? this.props.review.review.photo : '';
 		return (
 			<div>
@@ -46,28 +60,49 @@ class Review extends Component {
 
 				{ this.props.review.review && 
 					(<Card>
+						<Subheader>Review Page</Subheader>
 					    <CardHeader
-					      title={`User Review: ${this.props.review.author_id}`}
-					      subtitle={`Open Mic Id: ${this.props.review.open_mic_id}`}
-					      avatar="images/jsa-128.jpg"
+					      title={`Reviewed By: ${this.props.review.review.username}`}
+					      subtitle={`Jam Reviewed: ${this.props.review.review.jamTitle} in ${this.props.review.review.city}`}
+					      avatar={<Avatar src={this.props.review.review.userPhoto} />}
 					    />
+					    <Divider />
+					    <RaisedButton href={`/profile/${this.props.review.review.author_id}`} label={`Visit ${this.props.review.review.username}'s Profile`} type="submit" primary={true} style={{margin: '12px'}} />
+					    <RaisedButton href={`/jams/id/${this.props.review.review.open_mic_id}`} label={`Visit Jam Page`} type="submit" primary={true} style={{margin: '12px'}} />
 					    <CardMedia
-					      overlay={<CardTitle title={this.props.review.review.title} />}
+					      overlay={<CardTitle title={'Review: ' + this.props.review.review.title} />}
 					    >
 					      <img src={imgUrl} alt="Jam Image" />
 					    </CardMedia>
+					    <Subheader>Review Body</Subheader>
 					    <CardText>
 					      {this.props.review.review.body}
 					    </CardText>
 					  </Card>) }
 
-				<Card>
+				<Card style={{margin: '20px 0px'}}>
 					<Subheader>Comments</Subheader>
 					{ this.props.review.review_replies  &&
 						(<List>
 							{this.props.review.review_replies.map(nestedItem)}
 						</List>)
 					}
+					<Divider  />
+					<div style={{margin: '0px 15px'}}>
+						<form ref="form">
+							<TextField
+							  floatingLabelText="Reply to Review"
+							  floatingLabelFixed={true}
+							  hintText="Enter reply here"
+							  multiLine={true}
+							  rows={1}
+							  rowsMax={6}
+							  fullWidth={true}
+							  ref='body'
+							/>
+							<RaisedButton onClick={this.handleClick.bind(this)} label="Submit" type="submit" primary={true} style={{margin: '12px'}} />
+						</form>
+					</div>
 				</Card>
 			</div>
 		);

@@ -17,14 +17,24 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 				payload: axios.post('http://localhost:8080/api/reviews', form, {
 					processData: false,
                 	contentType: false,
-                	dataType: 'json'
+                	dataType: 'json',
+                	headers: {'x-access-token': localStorage.getItem('imp-tok') }
 				})
+			});
+		},
+		getJams: function(id){
+			dispatch({
+				type: 'GET_OPEN_MICS',
+				payload: axios.get('http://localhost:8080/api/open-mics/')
 			});
 		}
 	}
 };
 
 class CreateReviewContainer extends Component {
+	componentWillMount(){
+		this.props.getJams();
+	}
 	render(){
 		return <CreateReview {...this.props} />
 	}

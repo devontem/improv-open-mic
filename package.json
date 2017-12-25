@@ -11,6 +11,7 @@
     "express": "^4.16.2",
     "express-fileupload": "^0.3.0",
     "history": "^4.7.2",
+    "jsonwebtoken": "^8.1.0",
     "material-ui": "^0.20.0",
     "mongoose": "^4.13.7",
     "morgan": "^1.9.0",

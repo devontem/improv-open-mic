@@ -46,7 +46,7 @@ module.exports.getOpenMicById = function(req, res){
                 return;
             }
 
-            connection.query('SELECT * FROM `reviews` WHERE open_mic_id = ' + id, function(err, reviews, reviews_fields) {
+            connection.query('SELECT reviews.body, reviews.date, reviews.id, reviews.author_id, reviews.photo, u.username FROM reviews r, users u INNER JOIN reviews ON reviews.author_id = u.id WHERE reviews.open_mic_id =' + id +' group by reviews.id', function(err, reviews, reviews_fields) {
                 if (err) {
                     res.status(400).send({ data: err });
                     return;
@@ -63,7 +63,6 @@ module.exports.getOpenMicById = function(req, res){
 module.exports.createOpenMic = function(req, res){
 	var data = req.body;
 
-    data.venue_id = parseInt(data.venue_id);
     data.active = 1;
     // async connection to database
     database.then(function(connection){

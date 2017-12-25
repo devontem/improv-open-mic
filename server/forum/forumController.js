@@ -21,13 +21,13 @@ module.exports.getForumPostById = function(req, res){
 	var id = req.params.id;
 
     database.then(function(connection){
-    	connection.query('SELECT * FROM `forum_posts` WHERE id = ' + id, function(err, forum_post, forum_post_fields) {
+    	connection.query('SELECT * FROM forum_posts f, users u INNER JOIN forum_posts ON forum_posts.author_id = u.id WHERE forum_posts.id =' + id, function(err, forum_post, forum_post_fields) {
             if (err) {
                 res.status(400).send({ data: err });
                 return;
             }
 
-            connection.query('SELECT * FROM `forum_replies` WHERE `parent_post_id` = ' + id, function(error, forum_replies, fields) { 
+            connection.query('SELECT * FROM forum_replies f, users u INNER JOIN forum_replies ON forum_replies.author_id = u.id WHERE forum_replies.parent_post_id =' + id+' group by forum_replies.id', function(error, forum_replies, fields) { 
             	if (error) {
                 res.status(400).send({ data: error });
                 return;
@@ -48,6 +48,7 @@ module.exports.getForumPostById = function(req, res){
 
 module.exports.createPost = function(req, res){
 	var data = req.body;
+    data.author_id = req.userId; // pulling user id from auth middleware
     data.date = new Date();
 
     database.then(function(connection){
@@ -122,6 +123,7 @@ module.exports.editPost = function(req, res){
 
 module.exports.createPostReply = function(req, res){
 	var data = req.body;
+    data.author_id = req.userId; // pulling user id from auth middleware
 
     // handle type errors from frontend
     if (typeof data.parent_post_id === 'string') data.parent_post_id = parseInt(data.parent_post_id);

@@ -39,7 +39,7 @@ class SearchPage extends Component {
 			    { this.state.searchItems.length && 
 			    	<div>
 						<List style={{margin: '0px 10px'}}>
-							{ this.state.searchItems.map(item => <ListItem key={item.id} primaryText={item.title} />) }
+							{ this.state.searchItems.map(item => <ListItem key={item.id} href={`/jams/id/${item.id}`} primaryText={item.title} />) }
 						<Divider />
 						</List>
 					</div> }

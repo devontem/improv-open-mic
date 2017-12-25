@@ -20,7 +20,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		submitComment: function(form){
 			dispatch({
 				type: 'SUBMIT_THREAD_COMMENT',
-				payload: axios.post('http://localhost:8080/api/forum/post-reply', form)
+				payload: axios.post('http://localhost:8080/api/forum/post-reply', form, {
+					headers: {'x-access-token': localStorage.getItem('imp-tok') }
+				})
 			})
 			// getting new comments after submit
 			.then(() => {

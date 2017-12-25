@@ -14,7 +14,7 @@ module.exports = function(app, express){
 		    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
 		    // Request headers you wish to allow
-		    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+		    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, x-access-token');
 
 		    // Set to true if you need the website to include cookies in the requests sent
 		    // to the API (e.g. in case you use sessions)
@@ -49,6 +49,7 @@ module.exports = function(app, express){
 	var authRouter = express.Router();
 	var reviewsRouter = express.Router();
 	var forumRouter = express.Router();
+	var authRouter = express.Router();
 
 	// routes
 	app.use('/api/open-mics', openMicRouter);
@@ -56,6 +57,7 @@ module.exports = function(app, express){
 	app.use('/api/authenticate', authRouter);
 	app.use('/api/reviews', reviewsRouter);
 	app.use('/api/forum', forumRouter);
+	app.use('/api/auth', authRouter);
 
 	// initialize routes
 	var openMicRoutes = require('../openMic/routes');
@@ -72,6 +74,9 @@ module.exports = function(app, express){
 
 	var forumRoutes = require('../forum/routes');
 	forumRoutes(forumRouter);
+
+	var authRoutes = require('../auth/routes');
+	authRoutes(authRouter);
 
 	// render the react app
 	app.get('/', function(req, res){

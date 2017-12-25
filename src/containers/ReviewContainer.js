@@ -16,6 +16,21 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 				type: 'GET_REVIEW',
 				payload: axios.get('http://localhost:8080/api/reviews/'+id)
 			});
+		},
+		submitComment: function(form){
+			dispatch({
+				type: 'SUBMIT_REVIEW_REPLY_COMMENT',
+				payload: axios.post('http://localhost:8080/api/reviews/review-reply', form, {
+					headers: {'x-access-token': localStorage.getItem('imp-tok') }
+				})
+			})
+			// getting new comments after submit
+			.then(() => {
+				dispatch({
+					type: 'GET_REVIEW',
+					payload: axios.get('http://localhost:8080/api/reviews/' + form.review_id)
+				});
+			});
 		}
 	}
 };

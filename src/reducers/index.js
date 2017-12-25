@@ -3,12 +3,14 @@ import forum from './forumReducer';
 import openMics from './openMicReducer';
 import review from './reviewReducer';
 import profile from './profileReducer';
+import auth from './authReducer';
 
 const reducers = combineReducers({
 	forum,
 	openMics,
 	review,
-	profile
+	profile,
+	auth
 });
 
 export default reducers;

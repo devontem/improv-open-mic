@@ -22,6 +22,7 @@ import ActionInfo from 'material-ui/svg-icons/action/info';
 import Card from 'material-ui/Card';
 
 const Menu = (props) => {
+	var id = localStorage.getItem('imp-uid');
 	return (
 		<Card>
 			<List>
@@ -44,13 +45,10 @@ const Menu = (props) => {
 		    	<div>
 			    	<Divider />
 			    	<List>
-				      <ListItem primaryText="My Profile" leftIcon={<ContentInbox />} />
-				      <ListItem primaryText="My Venues" leftIcon={<ActionGrade />} />
-				      <ListItem primaryText="Following" leftIcon={<ContentSend />} />
-				      <ListItem primaryText="Followers" leftIcon={<ContentSend />} />
-				      <ListItem primaryText="My Reviews" leftIcon={<ContentDrafts />} />
-				      <Divider />
-				      <ListItem primaryText="Add Jam" leftIcon={<ContentInbox />} />
+				      <ListItem primaryText="My Profile" href={`/profile/${id}`} leftIcon={<ContentInbox />} />
+				      <ListItem primaryText="Following" href={`/profile/${id}?following=true`} leftIcon={<ContentSend />} />
+				      <ListItem primaryText="Followers" href={`/profile/${id}?followers=true`} leftIcon={<ContentSend />} />
+				      <ListItem primaryText="My Reviews" href={`/profile/${id}?reviews=true`} leftIcon={<ContentDrafts />} />
 				    </List>
 				</div> : '' }
 	    </Card>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import Profile from "./../components/Profile.jsx";
+const queryString = require('query-string');
 
 const mapStateToProps = (state, ownProps) => {
 	return {
@@ -28,7 +29,13 @@ class ProfileContainer extends Component {
 	}
 
 	render(){
-		return <Profile {...this.props} />
+		const parsed = queryString.parse(this.props.location.search);
+		const showAll = !parsed['followers'] && !parsed['following'] && !parsed['reviews'];
+		return <Profile {...this.props} showAll={showAll} 
+										followerView={parsed.followers === 'true'}
+										followingView={parsed.following === 'true'}
+										reviewsView={parsed.reviews === 'true'}
+										/>
 	}
 }
 

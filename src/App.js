@@ -15,6 +15,7 @@ import CreateJamContainer from './containers/CreateJamContainer';
 import JamPageContainer from './containers/JamPageContainer';
 import JamViewContainer from './containers/JamViewContainer';
 import ProfileContainer from './containers/ProfileContainer';
+import LoginSignUpContainer from './containers/LoginSignupContainer';
 
 //<Route path="/login" component={LoginContainer} />
   // login and sign up --> auth in backend and front end -- commenting, editing profile, creating reviews/jams
@@ -41,11 +42,15 @@ class App extends Component {
     };
   }
 
+  loggedIn(){
+    return localStorage.getItem('imp-tok') && localStorage.getItem('imp-uid');
+  }
+
   render() {
     return (
         <Provider store={store}>
           <Router history={customHistory}>
-            <Layout>
+            <Layout loggedIn={this.loggedIn.bind(this)()}>
               <Route exact path="/forum" component={ForumContainer} />
               <Route exact path="/forum/new" component={NewForumPostContainer} />
               <Route exact path="/forum/thread/:id" component={ForumThreadContainer} />
@@ -61,6 +66,8 @@ class App extends Component {
               <Route exact path="/countries" component={JamPageContainer}  />
 
               <Route exact path="/profile/:id" component={ProfileContainer}  />
+
+              <Route exact path="/login" component={LoginSignUpContainer} />
             </Layout>
           </Router>
         </Provider>

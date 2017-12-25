@@ -13,7 +13,7 @@ class CreateJam extends Component {
   		// creating post request
 		this.props.createJam({
 			title: this.refs.title.getValue(),
-			venue_id: this.refs.venue_id.getValue(),
+			venue: this.refs.venue.getValue(),
 			day_of_week: this.refs.day_of_week.getValue(),
 			start_time: this.refs.start_time.getValue(),
 			end_time: this.refs.end_time.getValue(),
@@ -23,12 +23,11 @@ class CreateJam extends Component {
 		// reset form
 	}
 
-
 	render(){
 
 		return (
 			<div>
-				<FlatButton href="/tags" label="GO BACK" labelPosition="after" primary={true} icon={<HardwareKeyboardArrowLeft />}/>
+				<FlatButton href="/jams" label="GO BACK" labelPosition="after" primary={true} icon={<HardwareKeyboardArrowLeft />}/>
 				<Card>
 					<Subheader>Create a New Jam Page</Subheader>
 					<div style={{padding: '0px 20px 20px'}}>
@@ -44,7 +43,7 @@ class CreateJam extends Component {
 						      floatingLabelText="Venue"
 						      floatingLabelFixed={true}
 						      multiLine={true}
-						      ref="venue_id"
+						      ref="venue"
 						      rows={1}
 						      rowsMax={6}
 						      fullWidth={true}

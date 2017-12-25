@@ -56,9 +56,10 @@ const secondaryText = (item) => {
 const nestedItem = (item) => {
 	return (
 			 <ListItem	key={item.id}
-	        			leftIcon={<Avatar src="images/ok-128.jpg" />} 
-	        			primaryText={item.author_id}
+	        			leftIcon={<Avatar  src={item.photo} />} 
+	        			primaryText={item.username}
 	        			secondaryTextLines={2}
+	        			href={`/reviews/id/${item.id}`}
 	      				secondaryText={secondaryText(item)}/>
 	);
 }
@@ -72,6 +73,7 @@ class Jam extends Component {
 
 				{ this.props.openMics.jam && 
 					(<Card style={{marginBottom: '20px'}}>
+						<Subheader>Jam Page</Subheader>
 					    <CardTitle  title={this.props.openMics.jam.title} 
 					    			subtitle={`Located in ${this.props.openMics.jam.city}, ${this.props.openMics.jam.country}`} />
 					    <Divider />
@@ -115,8 +117,10 @@ class Jam extends Component {
 
 				<Card>
 					<Subheader>Reviews</Subheader>
+					<Divider />
+					<RaisedButton label="Add a review" href="/reviews/new" primary={true} style={{margin: '12px'}} />
 					{ this.props.openMics.reviews  &&
-						(<List>
+						(<List style={{marginBottom: '50px'}}>
 							{this.props.openMics.reviews.map(nestedItem)}
 						</List>)
 					}

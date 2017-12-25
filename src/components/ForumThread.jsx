@@ -25,9 +25,10 @@ const secondaryText = (item) => {
 const nestedItem = (item) => {
 	return (
 			 <ListItem	key={item.id}
-	        			leftIcon={<Avatar src="images/ok-128.jpg" />} 
-	        			primaryText={item.author_id}
+	        			leftIcon={<Avatar src={item.photo} />} 
+	        			primaryText={item.username}
 	        			secondaryTextLines={2}
+	        			href={`/profile/${item.author_id}`}
 	      				secondaryText={secondaryText(item)}/>
 	);
 }
@@ -60,17 +61,18 @@ class ForumThread extends Component {
 						<CardTitle title={`Forum Post: ${this.props.forum.thread.forum_post.title}`} />
 						<List>
 						<ListItem
-						  leftAvatar={<Avatar src="images/ok-128.jpg" />}
-						  primaryText={this.props.forum.thread.forum_post.author_id}
+						  leftAvatar={<Avatar src={this.props.forum.thread.forum_post.photo} />}
+						  primaryText={this.props.forum.thread.forum_post.username}
 						  secondaryText={secondaryText(this.props.forum.thread.forum_post)}
 						  secondaryTextLines={2}
 						  rows={4}
 						  open={true}
+						  href={`/profile/${this.props.forum.thread.forum_post.author_id}`}
 						  nestedItems={this.props.forum.thread.forum_replies.map(nestedItem)}
 						/>
 						</List>
 						<Divider  />
-						<div style={{margin: '0px 15px'}}>
+						<div style={{margin: '10px 15px'}}>
 							<form ref="form">
 								<TextField
 								  floatingLabelText="Reply to thread"

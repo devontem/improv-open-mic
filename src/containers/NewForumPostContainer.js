@@ -14,7 +14,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		createForumPost: function(form){
 			dispatch({
 				type: 'CREATE_FORUM_POST',
-				payload: axios.post('http://localhost:8080/api/forum', form)
+				payload: axios.post('http://localhost:8080/api/forum', form, {
+					headers: {'x-access-token': localStorage.getItem('imp-tok') }
+				})
 			});
 		}
 	}

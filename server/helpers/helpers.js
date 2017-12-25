@@ -1,6 +1,9 @@
 var bcrypt = require('bcrypt');
 var fs = require('fs');
-var path = require('path');
+var path = require('path')
+var jwt = require('jsonwebtoken');
+var config = require('./../config/config');
+
 var MIME_TYPES = {
 	'image/gif': '.gif', 
 	'image/png': '.png', 
@@ -60,4 +63,39 @@ function getHash() {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
 
   return text;
+}
+
+module.exports.checkAuth = function(req, res, next){
+
+	// finds the token from the request, query, or header
+	var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+	if (token){
+
+		jwt.verify(token, config.authKey, function(err, decoded){
+
+			// if there is an error decoding the token
+			if (err) { 
+				res.status(403).send({
+					errorMessage: 'Failed to authenticate token.', 
+					error: true
+				}); 
+			} else {
+
+				// appending userId for every request
+				req.userId = decoded;
+				console.log('AUTH CHECK PASSED');
+				next();
+
+			}
+
+		});
+	} else {
+
+		// if there is no token provided
+		res.status(403).send({
+			error: true,
+			errorMessage: 'No token was provided. Failed to authenticate.'
+		});
+	}
 }
