@@ -13,7 +13,7 @@ module.exports.login = function(req, res){
 	// async connection to database
     database.then(function(connection){
         // query database 
-    	connection.query('SELECT * FROM `users` WHERE email = ' + connection.escape(email), function(error, results, fields) {
+    	connection.query("SELECT * FROM `users` WHERE email = ''" + connection.escape(email)+"''", function(error, results, fields) {
             if (error) {
                 res.status(400).send({ data: error });
                 return;
