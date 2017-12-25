@@ -16,6 +16,7 @@ import JamPageContainer from './containers/JamPageContainer';
 import JamViewContainer from './containers/JamViewContainer';
 import ProfileContainer from './containers/ProfileContainer';
 import LoginSignUpContainer from './containers/LoginSignupContainer';
+import TagsContainer from './containers/TagsContainer';
 
 //<Route path="/login" component={LoginContainer} />
   // login and sign up --> auth in backend and front end -- commenting, editing profile, creating reviews/jams
@@ -68,6 +69,8 @@ class App extends Component {
               <Route exact path="/profile/:id" component={ProfileContainer}  />
 
               <Route exact path="/login" component={LoginSignUpContainer} />
+
+              <Route exact path="/tags" component={TagsContainer} />
             </Layout>
           </Router>
         </Provider>

@@ -27,6 +27,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 				type: 'GET_OPEN_MICS',
 				payload: axios.get('http://localhost:8080/api/open-mics/')
 			});
+		},
+		getTags: function(id){
+			dispatch({
+				type: 'GET_TAGS',
+				payload: axios.get('http://localhost:8080/api/reviews/tags/')
+			});
 		}
 	}
 };
@@ -34,6 +40,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 class CreateReviewContainer extends Component {
 	componentWillMount(){
 		this.props.getJams();
+		this.props.getTags();
 	}
 	render(){
 		return <CreateReview {...this.props} />

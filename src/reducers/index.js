@@ -4,13 +4,15 @@ import openMics from './openMicReducer';
 import review from './reviewReducer';
 import profile from './profileReducer';
 import auth from './authReducer';
+import tags from './tagsReducer';
 
 const reducers = combineReducers({
 	forum,
 	openMics,
 	review,
 	profile,
-	auth
+	auth,
+	tags
 });
 
 export default reducers;

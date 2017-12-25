@@ -4,6 +4,7 @@ var hashPassword = require('./../helpers/helpers').hashPassword;
 var uploadImages = require('./../helpers/helpers').uploadImages;
 var database = require('./../db/database');
 var config = require('./../config/config');
+var PLACEHOLDER_IMG = 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png';
 
 module.exports.login = function(req, res){
 	var email = req.body.email;
@@ -104,7 +105,7 @@ module.exports.signUp = function(req, res){
                 data.email = connection.escape(data.email);
                 data.password = hashPassword(data.password);
                 data.join_date = new Date();
-                if (image_path) data.photo = image_path;
+                data.photo = image_path || PLACEHOLDER_IMG;
                 console.log('data clean', data);
 
 

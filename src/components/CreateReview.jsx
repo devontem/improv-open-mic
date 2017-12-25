@@ -15,11 +15,19 @@ class CreateReview extends Component {
 		this.state = {
 			accepted: [],
 			rejected: [],
-			select: null
+			select: null,
+			tagOne: null,
+			tagTwo: null
 		}
 	}
-	handleSelect(e, i, value){
+	handleJamSelect(e, i, value){
 		this.setState({select: value});
+	}
+	handleTagOne(e, i, value){
+		this.setState({tagOne: value});
+	}
+	handleTagTwo(e, i, value){
+		this.setState({tagTwo: value});
 	}
 	handleSubmit(e){
 		e.preventDefault();
@@ -30,9 +38,13 @@ class CreateReview extends Component {
 		form.append('body', this.refs.body.getValue());
 		form.append('open_mic_id', this.state.select);
   		form.append('photo', this.state.accepted[0]);
-
+  		form.append('tagOne', this.state.tagOne);
+  		form.append('tagTwo', this.state.tagTwo);
+  		for (var pair of form.entries()) {
+    console.log(pair[0]+ ', ' + pair[1]); 
+}
   		// creating post request
-		this.props.createReview(form);
+	 	this.props.createReview(form);
 	}
 
 	onDrop(files) {
@@ -47,7 +59,7 @@ class CreateReview extends Component {
 		return (
 			<div>
 				<FlatButton href="/" label="GO BACK" labelPosition="after" primary={true} icon={<HardwareKeyboardArrowLeft />}/>
-				{ this.props.openMics.items &&
+				{ this.props.openMics.items && this.props.tags.data &&
 					<Card>
 						<Subheader>Create a New Review</Subheader>
 						<div style={{padding: '0px 20px 20px'}}>
@@ -58,7 +70,7 @@ class CreateReview extends Component {
 							        fullWidth={true}
 							        floatingLabelText="Select Jam to Review"
 							        ref="jam_id"
-							        onChange={this.handleSelect.bind(this)}
+							        onChange={this.handleJamSelect.bind(this)}
 							      >
 							        {this.props.openMics.items.map((item) => <MenuItem value={item.id} key={item.id} primaryText={item.title} /> )}
 							      </SelectField>
@@ -78,6 +90,26 @@ class CreateReview extends Component {
 							      rowsMax={6}
 							      fullWidth={true}
 							    />
+							    <section>
+							    	<SelectField
+									value={this.state.tagOne}
+							        maxHeight={200}
+							        fullWidth={false}
+							        floatingLabelText="Pick a tag"
+							        onChange={this.handleTagOne.bind(this)}
+							      	>
+										{this.props.tags.data.map((item) => <MenuItem value={item.id} key={item.id} primaryText={item.title} /> )}
+									</SelectField>
+									<SelectField
+									value={this.state.tagTwo}
+									maxHeight={200}
+									fullWidth={false}
+									floatingLabelText="Pick a tag"
+									onChange={this.handleTagTwo.bind(this)}
+									>
+										{this.props.tags.data.map((item) => <MenuItem value={item.id} key={item.id} primaryText={item.title} /> )}
+									</SelectField>
+							    </section>
 							    <h3>Add One (1) Review Image</h3>
 							    <section>
 							        <div className="dropzone">

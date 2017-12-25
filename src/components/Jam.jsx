@@ -48,7 +48,7 @@ const styles = {
 const secondaryText = (item) => {
 	return (<p>
 				{item.body} <br />
-				<a href={`/reviews/id/${item.id}`}>Read More & See Comments...</a>
+				<a href={`/reviews/id/${item.id}`}>Read more & see comments...</a>
 				<small style={{color: 'black', float: 'right'}}>{new Date(item.date).toDateString()}</small>
 			</p>);
 }
@@ -79,7 +79,7 @@ class Jam extends Component {
 					    <Divider />
 					    { this.props.openMics.reviews  &&
 					    <GridList style={styles.gridList} cols={2.2}>
-					      {this.props.openMics.reviews.map((item) => (
+					      {this.props.openMics.reviews.filter(item => item.photo).map((item) => (
 					        <GridTile
 					          key={item.id}
 					          title={item.title}
@@ -119,6 +119,7 @@ class Jam extends Component {
 					<Subheader>Reviews</Subheader>
 					<Divider />
 					<RaisedButton label="Add a review" href="/reviews/new" primary={true} style={{margin: '12px'}} />
+					<Divider />
 					{ this.props.openMics.reviews  &&
 						(<List style={{marginBottom: '50px'}}>
 							{this.props.openMics.reviews.map(nestedItem)}
