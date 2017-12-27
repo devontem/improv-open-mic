@@ -11,5 +11,5 @@ module.exports = function(app){
 	app.delete('/:id', reviewsController.deleteReview);
 	// app.post('/:id/like', reviewsController.likeReview);
 	app.post('/review-reply', checkAuth, reviewsController.createReviewReply);
-	app.put('/review-reply/:id', reviewsController.editReviewReply)
+	app.delete('/review-reply/:id', checkAuth, reviewsController.deleteReviewReply);
 }

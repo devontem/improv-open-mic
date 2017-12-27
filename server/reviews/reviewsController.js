@@ -22,14 +22,14 @@ module.exports.getReviewById = function(req, res){
 	var id = req.params.id;
 
     database.then(function(connection){
-    	connection.query('SELECT reviews.title, reviews.body, reviews.photo, reviews.author_id, reviews.id, reviews.open_mic_id, reviews.date, r.id, u.username, u.photo as userPhoto, o.title as jamTitle, o.city FROM reviews r, users u INNER JOIN reviews ON reviews.author_id = u.id INNER JOIN open_mics o ON o.id = reviews.open_mic_id where reviews.id = '+id+' group by reviews.id', function(err, review, review_fields) {
+    	connection.query('SELECT reviews.title, reviews.body, reviews.photo, reviews.author_id, reviews.id, reviews.open_mic_id, reviews.date, u.username, u.photo as userPhoto, o.title as jamTitle, o.city FROM reviews r, users u INNER JOIN reviews ON reviews.author_id = u.id INNER JOIN open_mics o ON o.id = reviews.open_mic_id where reviews.id = '+id+' group by reviews.id', function(err, review, review_fields) {
             if (err) {
                 res.status(400).send({ data: err });
                 console.log('first error -- hello', err)
                 return;
             }
 
-            connection.query('SELECT review_comments.date, review_comments.review_id, review_comments.body, review_comments.author_id, u.username, u.photo, u.id FROM review_comments r, users u INNER JOIN review_comments ON review_comments.author_id = u.id WHERE review_comments.review_id = '+ id +' group by review_comments.id', function(error, review_replies, fields) { 
+            connection.query('SELECT review_comments.date, review_comments.review_id, review_comments.body, review_comments.author_id, u.username, u.photo, review_comments.id, u.id as userId FROM review_comments r, users u INNER JOIN review_comments ON review_comments.author_id = u.id WHERE review_comments.review_id = '+ id +' group by review_comments.id', function(error, review_replies, fields) { 
                 if (error) {
                     res.status(400).send({ data: error });
                     console.log('second error', error)
@@ -194,6 +194,41 @@ module.exports.createReviewReply = function(req, res){
             }
 
             res.status(200).send({ data: results });
+        });
+    });
+}
+
+module.exports.deleteReviewReply = function(req, res){
+    var id = parseInt(req.params.id);
+    var userId = parseInt(req.userId);
+
+    database.then(function(connection){
+        connection.query('SELECT * FROM `review_comments` where id = ' + id , function(error, results, fields) {
+            if (error) {
+                console.log(error);
+                res.status(400).send({ data: error });
+                return;
+            }
+            var comment = results[0];
+
+            // checking if logged in user is deleting their own comment
+            if (comment && comment.author_id === userId){
+                deleteComment();
+            } else {
+                res.status(400).send({error: 'Access forbidden. Only author creator can delete their comments.'});
+            }
+
+            function deleteComment(){
+                connection.query('DELETE from `review_comments` where id = '+ id, function(error1, results1, fields1) {
+                    if (error1) {
+                        console.log(error1);
+                        res.status(400).send({ data: error1 });
+                        return;
+                    }
+
+                    res.status(200).send({ data: results1 });
+                });
+            }
         });
     });
 }

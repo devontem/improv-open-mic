@@ -20,6 +20,16 @@ import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-a
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 
+const iconButtonElement = (
+  <IconButton
+    touch={true}
+    tooltip="more"
+    tooltipPosition="bottom-left"
+  >
+    <MoreVertIcon />
+  </IconButton>
+);
+
 const secondaryText = (item) => {
 	return (<p>
 				{item.body} <br /> 
@@ -27,21 +37,7 @@ const secondaryText = (item) => {
 			</p>);
 }
 
-const nestedItem = (item) => {
-	return (
-			 <ListItem	key={item.id}
-	        			leftIcon={<Avatar  src={item.photo} />} 
-	        			primaryText={item.username}
-	        			href={`/profile/${item.author_id}`}
-	        			secondaryTextLines={2}
-	      				secondaryText={secondaryText(item)}/>
-	);
-}
-
 class Review extends Component {
-	onChange(e){
-
-	}
 	handleClick(e){
 		e.preventDefault();
 		this.props.submitComment({
@@ -51,6 +47,7 @@ class Review extends Component {
 		});
 		this.refs.form.reset();
 	}
+
 	render() {
 		console.log(this.props);
 		var imgUrl = (this.props.review.review) ? this.props.review.review.photo : '';
@@ -84,7 +81,18 @@ class Review extends Component {
 					<Subheader>Comments</Subheader>
 					{ this.props.review.review_replies  &&
 						(<List>
-							{this.props.review.review_replies.map(nestedItem)}
+							{this.props.review.review_replies.map(item => {
+								return (<ListItem	key={item.id}
+										        			leftIcon={<Avatar src={item.photo} />} 
+										        			primaryText={<h4 style={{margin: '0px'}} ><a href={`/profile/${item.author_id}`}>{item.username}</a></h4>}
+										        			secondaryTextLines={2}
+										        			rightIconButton={
+										        				(<IconMenu iconButtonElement={iconButtonElement}>
+																	    <MenuItem onClick={this.props.deleteComment.bind(this, item.id, this.props.review.review.id)}>Delete</MenuItem>
+																	  </IconMenu>)
+										        			}
+										      				secondaryText={secondaryText(item)} />)
+							})}
 						</List>)
 					}
 					<Divider  />
