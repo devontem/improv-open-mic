@@ -32,8 +32,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 				});
 			});
 		},
-		deleteComment(id, review_id){
-			console.log('id being deleted', id, review_id)
+		deleteComment: function(id, review_id){
 			dispatch({
 				type: 'DELETE_REVIEW_REPLY',
 				payload: axios.delete('http://localhost:8080/api/reviews/review-reply/' + id, {
@@ -45,6 +44,18 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 					type: 'GET_REVIEW',
 					payload: axios.get('http://localhost:8080/api/reviews/'+review_id)
 				});
+			});
+		},
+		deleteReview: function(id){
+			console.log('id being deleted', id)
+			dispatch({
+				type: 'DELETE_REVIEW',
+				payload: axios.delete('http://localhost:8080/api/reviews/' + id, {
+					headers: {'x-access-token': localStorage.getItem('imp-tok') }
+				})
+			})
+			.then(() => {
+				this.props.history.push('/');
 			});
 		}
 	}

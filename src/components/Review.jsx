@@ -62,10 +62,13 @@ class Review extends Component {
 					      title={`Reviewed By: ${this.props.review.review.username}`}
 					      subtitle={`Jam Reviewed: ${this.props.review.review.jamTitle} in ${this.props.review.review.city}`}
 					      avatar={<Avatar src={this.props.review.review.userPhoto} />}
+		      				/>)
 					    />
 					    <Divider />
 					    <RaisedButton href={`/profile/${this.props.review.review.author_id}`} label={`Visit ${this.props.review.review.username}'s Profile`} type="submit" primary={true} style={{margin: '12px'}} />
 					    <RaisedButton href={`/jams/id/${this.props.review.review.open_mic_id}`} label={`Visit Jam Page`} type="submit" primary={true} style={{margin: '12px'}} />
+					    { this.props.loggedIn && this.props.loggedInUser == this.props.review.review.author_id && 
+					    		<RaisedButton onClick={this.props.deleteReview.bind(this, this.props.review.review.id)} label={`Delete Review`} primary={false} style={{margin: '12px'}}/>}
 					    <CardMedia
 					      overlay={<CardTitle title={'Review: ' + this.props.review.review.title} />}
 					    >

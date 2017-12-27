@@ -61,12 +61,11 @@ class ForumThread extends Component {
 						<List>
 						<ListItem
 						  leftAvatar={<Avatar src={this.props.forum.thread.forum_post.photo} />}
-						  primaryText={this.props.forum.thread.forum_post.username}
+						  primaryText={<h4 style={{margin: '0px'}}><a href={`/profile/${this.props.forum.thread.forum_post.author_id}`}>{this.props.forum.thread.forum_post.username}</a></h4>}
 						  secondaryText={secondaryText(this.props.forum.thread.forum_post)}
 						  secondaryTextLines={2}
 						  rows={4}
 						  open={true}
-						  href={`/profile/${this.props.forum.thread.forum_post.author_id}`}
 						  nestedItems={this.props.forum.thread.forum_replies.map(item=>{
 						  	return <ListItem	key={item.id}
 							        			leftIcon={<Avatar src={item.photo} />} 

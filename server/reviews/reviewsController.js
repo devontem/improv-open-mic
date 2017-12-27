@@ -49,17 +49,36 @@ module.exports.getReviewById = function(req, res){
 }
 
 module.exports.deleteReview = function(req, res){
-	var id = req.body.id;
-    // async connection to database
+    var id = parseInt(req.params.id);
+    var userId = parseInt(req.userId);
+
     database.then(function(connection){
-        // query database 
-    	connection.query('DELETE FROM `reviews` WHERE id = ' + id , function(error, results, fields) {
+        connection.query('SELECT * FROM `reviews` where id = ' + id , function(error, results, fields) {
             if (error) {
+                console.log(error);
                 res.status(400).send({ data: error });
                 return;
             }
+            var review = results[0];
+            console.log(review , review.author_id , userId)
+            // checking if logged in user is deleting their own review
+            if (review && review.author_id === userId){
+                deleteReview();
+            } else {
+                res.status(400).send({error: 'Access forbidden. Only author creator can delete their reviews.'});
+            }
 
-            res.status(200).send({ data: results });
+            function deleteReview(){
+                connection.query('DELETE from `reviews` where id = '+ id, function(error1, results1, fields1) {
+                    if (error1) {
+                        console.log(error1);
+                        res.status(400).send({ data: error1 });
+                        return;
+                    }
+
+                    res.status(200).send({ data: results1 });
+                });
+            }
         });
     });
 }
