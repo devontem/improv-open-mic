@@ -55,10 +55,13 @@ class Forum extends Component {
 				      				<ListItem
 								        leftAvatar={<Avatar icon={<ActionAssignment />} 
 								        backgroundColor={blue500} />}
-								        rightIcon={rightIconMenu}
-								        primaryText={item.title}
+								        primaryText={<h4 style={{margin: '0px'}}><a href={`/forum/thread/${item.id}`}>{item.title}</a></h4>}
 								        secondaryText={new Date(item.date).toDateString()}
-								        href={`/forum/thread/${item.id}`}
+								        {...this.props.loggedIn && this.props.loggedInUser == item.author_id && {rightIconButton: 
+					        				(<IconMenu iconButtonElement={iconButtonElement}>
+												   	<MenuItem onClick={this.props.deletePost.bind(this, item.id)}>Delete</MenuItem>
+												  </IconMenu>)
+					        			}}
 								    />
 				      			</div>
 				      		);

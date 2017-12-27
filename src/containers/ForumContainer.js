@@ -16,6 +16,20 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 				type: 'GET_FORUM_POSTS',
 				payload: axios.get('http://localhost:8080/api/forum')
 			});
+		},
+		deletePost: function(id){
+			dispatch({
+				type: 'DELETE_FORUM_POSTS',
+				payload: axios.delete('http://localhost:8080/api/forum/'+id, {
+					headers: {'x-access-token': localStorage.getItem('imp-tok') }
+				})
+			})
+			.then(()=>{
+				dispatch({
+					type: 'GET_FORUM_POSTS',
+					payload: axios.get('http://localhost:8080/api/forum')
+				});
+			});
 		}
 	}
 };
@@ -25,8 +39,12 @@ class ForumContainer extends Component {
 		this.props.getForumPosts();
 	}
 
+	loggedIn(){
+		return localStorage.getItem('imp-tok') && localStorage.getItem('imp-uid');
+	}
+
 	render(){
-		return <Forum {...this.props} />
+		return <Forum loggedInUser={localStorage.getItem('imp-uid')} loggedIn={this.loggedIn()} {...this.props} />
 	}
 }
 

@@ -6,7 +6,7 @@ module.exports = function(app){
 	app.post('/', checkAuth, forumController.createPost);
 	app.get('/:id', forumController.getForumPostById);
 	app.put('/:id', forumController.editPost);
-	app.delete('/:id', forumController.editPost);
+	app.delete('/:id', checkAuth, forumController.deletePost);
 	// app.post('/:id/like', forumController.likePost);
 	app.post('/post-reply', checkAuth, forumController.createPostReply);
 	app.put('/post-reply/:id', forumController.editPostReply);
