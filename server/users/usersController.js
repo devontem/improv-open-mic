@@ -126,27 +126,25 @@ module.exports.unfollowUser = function (req, res) {
 };
 
 module.exports.editUser = function(req, res){
-	// check if can be implemented with set case
-	// var data = req.body;
-	// var changes = [ data['title'], 
-	// 				data['venue_id'], 
-	// 				data['day_of_week'], 
-	// 				data['start_time'], 
-	// 				data['end_time'], 
-	// 				data['city'], 
-	// 				data['country'], 
-	// 				data['active'], 
-	// 				data['id']];
+    var id = parseInt(req.userId);
+    var data = req.body;
+    // hashing password for storage
+    data.password = hashPassword(data.password);
+    var changes = [data.username, data.email, data.password];
 
- //    // async connection to database
- //    database.then(function(connection){
- //        // query database 
- //    	connection.query('UPDATE `open_mics` SET title = ?, venue_id = ?, day_of_week = ?, start_time = ?, end_time = ?, city = ?, country = ?, active = ? WHERE id = ?', changes, function(error, results, fields) {
- //            if (err) res.status(400).send({ data: error });
+    // async connection to database
+    database.then(function(connection){
+        // query database 
+    	connection.query('UPDATE `users` SET username = ?, email = ?, password = ? WHERE id = ' + id, changes, function(error, results, fields) {
+            if (error) {
+                console.log(error);
+                res.status(400).send({ data: error });
+                return;
+            }
 
- //            res.status(200).send({ data: results });
- //        });
- //    });
+            res.status(200).send({ data: results });
+        });
+    });
 }
 
 module.exports.searchUsers = function(req, res){

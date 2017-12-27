@@ -7,6 +7,6 @@ module.exports = function(app) {
 	app.post('/follow', checkAuth, ctrl.followUser);
 	app.post('/unfollow', checkAuth, ctrl.unfollowUser);
 	app.get('/:id', ctrl.getUserById);
-	app.put('/:id', ctrl.editUser);
+	app.put('/:id', checkAuth, ctrl.editUser);
 	app.get('/search', ctrl.searchUsers);
 }

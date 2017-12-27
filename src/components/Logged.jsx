@@ -8,6 +8,7 @@ class Logged extends Component {
   signout(){
     localStorage.removeItem('imp-uid');
     localStorage.removeItem('imp-tok');
+    this.props.history.push('/');
   }
   render(){
   	return (
@@ -19,8 +20,7 @@ class Logged extends Component {
       targetOrigin={{horizontal: 'right', vertical: 'top'}}
       anchorOrigin={{horizontal: 'right', vertical: 'top'}}
     >
-      <MenuItem primaryText="Refresh" />
-      <MenuItem primaryText="Help" />
+      <MenuItem primaryText="Account" href="/account" />
       <MenuItem primaryText="Sign out" onClick={this.signout.bind(this)} />
     </IconMenu>
   	);

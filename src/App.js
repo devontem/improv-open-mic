@@ -17,22 +17,7 @@ import JamViewContainer from './containers/JamViewContainer';
 import ProfileContainer from './containers/ProfileContainer';
 import LoginSignUpContainer from './containers/LoginSignupContainer';
 import TagsContainer from './containers/TagsContainer';
-
-//<Route path="/login" component={LoginContainer} />
-  // login and sign up --> auth in backend and front end -- commenting, editing profile, creating reviews/jams
-//<Route path="/settings" component={SettingsContainer} />
-  // simple page to change name, email, photo
-
-//<Route path="/profile/:id" component={ProfileContainer} />
-  // avatar, following, followers, my reviews, details about me
-//<Route path="/followers" component={FollowingContainer} />
-//<Route path="/following" component={FollowersContainer} />
-//<Route path="/my-reviews" component={MyReviewsContainer} />
-//<Route path="/social" component={SocialContainer} />
-  // latest reviews, signed up users, photos
-
-//homepage
-  //data visualization
+import AccountContainer from './containers/AccountContainer';
 
 const customHistory = createBrowserHistory();
 
@@ -71,6 +56,7 @@ class App extends Component {
               <Route exact path="/login" component={LoginSignUpContainer} />
 
               <Route exact path="/tags" component={TagsContainer} />
+              <Route exact path="/account" component={AccountContainer} />
             </Layout>
           </Router>
         </Provider>

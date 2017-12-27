@@ -6,6 +6,7 @@ import AppBar from 'material-ui/AppBar';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import HappyFaceIcon from 'material-ui/svg-icons/social/sentiment-very-satisfied';
 import 'bootstrap-grid/dist/grid.min.css';
+import './../assets/styles.css';
 
 import Logged from './Logged';
 import Login from './Login';
@@ -16,9 +17,9 @@ const Layout = (props) => {
 		<MuiThemeProvider>
 			<div>
 				<AppBar
-				title="Improv Jam Open Mics"
+				title={<a className="app-bar-title" href="/">Improv Jam Open Mics</a>}
 				iconElementLeft={<IconButton><HappyFaceIcon /></IconButton>}
-				iconElementRight={props.loggedIn ? <Logged /> : <Login />}
+				iconElementRight={props.loggedIn ? <Logged {...this.props} /> : <Login />}
 				/>
 
 				<div className="container-fluid">
