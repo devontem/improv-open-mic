@@ -15,22 +15,21 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
 
+const iconButtonElement = (
+  <IconButton
+    touch={true}
+    tooltip="more"
+    tooltipPosition="bottom-left"
+  >
+    <MoreVertIcon />
+  </IconButton>
+);
+
 const secondaryText = (item) => {
 	return (<p>
 				{item.body} <br /> 
 				<small style={{color: 'black', float: 'right'}}>{new Date(item.date).toDateString()}</small>
 			</p>);
-}
-
-const nestedItem = (item) => {
-	return (
-			 <ListItem	key={item.id}
-	        			leftIcon={<Avatar src={item.photo} />} 
-	        			primaryText={item.username}
-	        			secondaryTextLines={2}
-	        			href={`/profile/${item.author_id}`}
-	      				secondaryText={secondaryText(item)}/>
-	);
 }
 
 class ForumThread extends Component {
@@ -68,7 +67,19 @@ class ForumThread extends Component {
 						  rows={4}
 						  open={true}
 						  href={`/profile/${this.props.forum.thread.forum_post.author_id}`}
-						  nestedItems={this.props.forum.thread.forum_replies.map(nestedItem)}
+						  nestedItems={this.props.forum.thread.forum_replies.map(item=>{
+						  	return <ListItem	key={item.id}
+							        			leftIcon={<Avatar src={item.photo} />} 
+							        			primaryText={<h4 style={{margin: '0px'}}><a href={`/profile/${item.author_id}`}>{item.username}</a></h4>}
+							        			secondaryTextLines={2}
+							      				secondaryText={secondaryText(item)}
+							      				{...this.props.loggedIn && this.props.loggedInUser == item.author_id && {rightIconButton: 
+							        				(<IconMenu iconButtonElement={iconButtonElement}>
+														   	<MenuItem onClick={this.props.deletePost.bind(this, item.id, this.props.forum.thread.forum_post.id)}>Delete</MenuItem>
+														  </IconMenu>)
+							        			}}
+							      	/>
+						  })}
 						/>
 						</List>
 						<Divider  />

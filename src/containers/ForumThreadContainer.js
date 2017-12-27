@@ -3,6 +3,8 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import ForumThread from "./../components/ForumThread.jsx";
 
+
+
 const mapStateToProps = (state, ownProps) => {
 	return {
 		...state // spread state properties
@@ -31,6 +33,20 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 					payload: axios.get('http://localhost:8080/api/forum/' + form.parent_post_id)
 				});
 			});
+		},
+		deletePost: function(id, thread_id){
+			dispatch({
+				type: 'DELETE_FORUM_POST_REPLY',
+				payload: axios.delete('http://localhost:8080/api/forum/post-reply/'+id, {
+					headers: {'x-access-token': localStorage.getItem('imp-tok') }
+				})
+			})
+			.then(()=>{
+				dispatch({
+					type: 'GET_THREAD_POST',
+					payload: axios.get('http://localhost:8080/api/forum/'+ thread_id)
+				});
+			});
 		}
 	}
 };
@@ -41,8 +57,12 @@ class ForumThreadContainer extends Component {
 		this.props.getThreadById(id);
 	}
 
+	loggedIn(){
+		return localStorage.getItem('imp-tok') && localStorage.getItem('imp-uid');
+	}
+
 	render(){
-		return <ForumThread {...this.props} />
+		return <ForumThread loggedInUser={localStorage.getItem('imp-uid')} loggedIn={this.loggedIn()} {...this.props} />
 	}
 }
 

@@ -10,4 +10,5 @@ module.exports = function(app){
 	// app.post('/:id/like', forumController.likePost);
 	app.post('/post-reply', checkAuth, forumController.createPostReply);
 	app.put('/post-reply/:id', forumController.editPostReply);
+	app.delete('/post-reply/:id', checkAuth, forumController.deletePostReply);
 }

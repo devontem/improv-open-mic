@@ -178,3 +178,38 @@ module.exports.editPostReply = function(req, res){
 
     function catchErrors(err){ res.status(400).send({ data: err }); return; }
 }
+
+module.exports.deletePostReply = function(req, res){
+    var id = parseInt(req.params.id);
+    var userId = parseInt(req.userId);
+
+    database.then(function(connection){
+        connection.query('SELECT * FROM `forum_replies` where id = ' + id , function(error, results, fields) {
+            if (error) {
+                console.log(error);
+                res.status(400).send({ data: error });
+                return;
+            }
+            var post = results[0];
+
+            // checking if logged in user is deleting their own post
+            if (post && post.author_id === userId){
+                deletePost();
+            } else {
+                res.status(400).send({error: 'Access forbidden. Only author creator can delete their posts.'});
+            }
+
+            function deletePost(){
+                connection.query('DELETE from `forum_replies` where id = '+ id, function(error1, results1, fields1) {
+                    if (error1) {
+                        console.log(error1);
+                        res.status(400).send({ data: error1 });
+                        return;
+                    }
+
+                    res.status(200).send({ data: results1 });
+                });
+            }
+        });
+    });
+}
