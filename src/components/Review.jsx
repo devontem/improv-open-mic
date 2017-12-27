@@ -19,6 +19,7 @@ import FlatButton from 'material-ui/FlatButton';
 import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
+import HappyFaceIcon from 'material-ui/svg-icons/social/sentiment-very-satisfied';
 
 const iconButtonElement = (
   <IconButton
@@ -49,7 +50,6 @@ class Review extends Component {
 	}
 
 	render() {
-		console.log(this.props);
 		var imgUrl = (this.props.review.review) ? this.props.review.review.photo : '';
 		return (
 			<div>
@@ -86,12 +86,13 @@ class Review extends Component {
 										        			leftIcon={<Avatar src={item.photo} />} 
 										        			primaryText={<h4 style={{margin: '0px'}} ><a href={`/profile/${item.author_id}`}>{item.username}</a></h4>}
 										        			secondaryTextLines={2}
-										        			rightIconButton={
+										        			secondaryText={secondaryText(item)}
+										        			{...this.props.loggedIn && this.props.loggedInUser == item.userId && {rightIconButton: 
 										        				(<IconMenu iconButtonElement={iconButtonElement}>
-																	    <MenuItem onClick={this.props.deleteComment.bind(this, item.id, this.props.review.review.id)}>Delete</MenuItem>
+																	   	<MenuItem onClick={this.props.deleteComment.bind(this, item.id, this.props.review.review.id)}>Delete</MenuItem>
 																	  </IconMenu>)
-										        			}
-										      				secondaryText={secondaryText(item)} />)
+										        			}}
+										      				/>)
 							})}
 						</List>)
 					}

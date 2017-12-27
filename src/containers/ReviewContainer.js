@@ -62,7 +62,7 @@ class ReviewContainer extends Component {
 	}
 
 	render(){
-		return <Review loggedIn={this.loggedIn()} {...this.props} />
+		return <Review loggedInUser={localStorage.getItem('imp-uid')} loggedIn={this.loggedIn()} {...this.props} />
 	}
 }
 
