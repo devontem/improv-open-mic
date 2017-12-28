@@ -23,8 +23,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 };
 
 class CreateJamContainer extends Component {
+	loggedIn(){
+		return localStorage.getItem('imp-tok') && localStorage.getItem('imp-uid');
+	}
+	
 	render(){
-		return <CreateJam {...this.props} />
+		return <CreateJam loggedIn={this.loggedIn()} {...this.props} />
 	}
 }
 

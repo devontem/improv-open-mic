@@ -42,8 +42,13 @@ class CreateReviewContainer extends Component {
 		this.props.getJams();
 		this.props.getTags();
 	}
+
+	loggedIn(){
+		return localStorage.getItem('imp-tok') && localStorage.getItem('imp-uid');
+	}
+
 	render(){
-		return <CreateReview {...this.props} />
+		return <CreateReview loggedIn={this.loggedIn()}  {...this.props} />
 	}
 }
 

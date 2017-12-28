@@ -8,6 +8,10 @@ import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-a
 import { Redirect } from 'react-router-dom';
 
 class NewForumPost extends Component {
+	componentWillMount(){
+		if (!this.props.loggedIn) this.props.history.push('/login');
+	}
+
 	handleSubmit(e){
 		e.preventDefault();
 		this.props.createForumPost({
@@ -33,6 +37,7 @@ class NewForumPost extends Component {
 						      floatingLabelFixed={true}
 						      fullWidth={true}
 						      ref="title"
+						      errorText="This field is required"
 						    />
 						    <TextField
 						      floatingLabelText="Post Body"

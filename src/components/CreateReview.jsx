@@ -19,7 +19,10 @@ class CreateReview extends Component {
 			tagOne: null,
 			tagTwo: null
 		}
+
+		if (!this.props.loggedIn) this.props.history.push('/login');
 	}
+
 	handleJamSelect(e, i, value){
 		this.setState({select: value});
 	}

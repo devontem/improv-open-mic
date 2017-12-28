@@ -23,8 +23,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 };
 
 class NewForumPostContainer extends Component {
+	loggedIn(){
+		return localStorage.getItem('imp-tok') && localStorage.getItem('imp-uid');
+	}
+
 	render(){
-		return <NewForumPost {...this.props} />
+		return <NewForumPost loggedIn={this.loggedIn()} {...this.props} />
 	}
 }
 

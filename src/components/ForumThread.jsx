@@ -82,21 +82,25 @@ class ForumThread extends Component {
 						/>
 						</List>
 						<Divider  />
-						<div style={{margin: '10px 15px'}}>
-							<form ref="form">
-								<TextField
-								  floatingLabelText="Reply to thread"
-								  floatingLabelFixed={true}
-								  hintText="Enter reply here"
-								  multiLine={true}
-								  rows={1}
-								  rowsMax={6}
-								  fullWidth={true}
-								  onChange={this.onChange.bind(this)}
-								/>
-							</form>
-						</div>
-						<RaisedButton onClick={this.handleClick.bind(this)} label="Submit" type="submit" primary={true} style={{margin: '12px'}} />
+						{ this.props.loggedIn &&
+							<div>
+								<div style={{margin: '10px 15px'}}>
+									<form ref="form">
+										<TextField
+										  floatingLabelText="Reply to thread"
+										  floatingLabelFixed={true}
+										  hintText="Enter reply here"
+										  multiLine={true}
+										  rows={1}
+										  rowsMax={6}
+										  fullWidth={true}
+										  onChange={this.onChange.bind(this)}
+										/>
+									</form>
+								</div>
+								<RaisedButton onClick={this.handleClick.bind(this)} label="Submit" type="submit" primary={true} style={{margin: '12px'}} />
+							</div>
+						}
 				    </Card>) }
 			</div>
 		);

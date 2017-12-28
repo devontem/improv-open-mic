@@ -8,6 +8,10 @@ import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-a
 import { Redirect } from 'react-router-dom';
 
 class CreateJam extends Component {
+	componentWillMount(){
+		if (!this.props.loggedIn) this.props.history.push('/login');
+	}
+
 	handleSubmit(e){
 		e.preventDefault();
   		// creating post request
@@ -24,7 +28,7 @@ class CreateJam extends Component {
 	}
 
 	render(){
-
+		console.log(this.props)
 		return (
 			<div>
 				<FlatButton href="/jams" label="GO BACK" labelPosition="after" primary={true} icon={<HardwareKeyboardArrowLeft />}/>
