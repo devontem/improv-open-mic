@@ -31,7 +31,6 @@ const JamView = (props) => {
 	if (props.groupByCountry) {
 		// group inside object
 		jams.forEach((item) => {
-			console.log(item)
 			if (!countries[item.country]) countries[item.country] = [];
 			countries[item.country].push(item);
 		});
@@ -39,6 +38,7 @@ const JamView = (props) => {
 			return (<ListItem primaryText={key} 
 								key={i}
 								leftIcon={<SocialPublic />} 
+								open={true}
 								nestedItems={countries[key].map((item) => {
 									return (<ListItem primaryText={item.title} leftIcon={<NavigationChevronRight />} key={item.id} href={`/jams/id/${item.id}`} />);
 								})} 

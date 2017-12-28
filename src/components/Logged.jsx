@@ -3,14 +3,21 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import { Redirect } from 'react-router-dom';
 
 class Logged extends Component {
+  componentWillMount(){
+    this.state = {
+      redirect: false
+    };
+  }
   signout(){
     localStorage.removeItem('imp-uid');
     localStorage.removeItem('imp-tok');
-    this.props.history.push('/');
+    this.setState({redirect: true})
   }
   render(){
+    if (this.state.redirect) return (<Redirect to={`/`}/>);
   	return (
   		<IconMenu
       {...this.props}

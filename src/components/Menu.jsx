@@ -18,6 +18,7 @@ import ActionAccessibility from 'material-ui/svg-icons/action/accessibility';
 import Divider from 'material-ui/Divider';
 
 
+
 import ActionInfo from 'material-ui/svg-icons/action/info';
 import Card from 'material-ui/Card';
 
@@ -27,15 +28,11 @@ const Menu = (props) => {
 		<Card>
 			<List>
 		      <ListItem primaryText="Home" leftIcon={<ActionHome />} />
-		      <ListItem primaryText="Find Jams" 
-		      			leftIcon={<ActionStore />} 
-		      			nestedItems={[
-		      					<ListItem primaryText="Search" href="/search" leftIcon={<ActionSearch />} />,
-		      					<ListItem primaryText="All Jams" href="/jams" leftIcon={<ActionAccessibility />} />,
-		      					<ListItem primaryText="Tags" href="/tags"  leftIcon={<ActionViewModule />} />,
-		      					<ListItem primaryText="Countries" href="/jams?country=true" leftIcon={<SocialPublic />} />,
-		      				]}/>
 		      <ListItem primaryText="Forum" href="/forum" leftIcon={<CommunicationForum />} />
+					<ListItem primaryText="Search" href="/search" leftIcon={<ActionSearch />} />
+					<ListItem primaryText="All Jams" href="/jams" leftIcon={<ActionAccessibility />} />
+					<ListItem primaryText="Tags" href="/tags"  leftIcon={<ActionViewModule />} />
+					<ListItem primaryText="Countries" href="/jams?country=true" leftIcon={<SocialPublic />} />
 		      <Divider />
 		      <ListItem primaryText="Add Jam" href="/jams/new" leftIcon={<ContentAddCircle />} />
 		      <ListItem primaryText="Add Review" href="/reviews/new" leftIcon={<ActionNoteAdd />} />

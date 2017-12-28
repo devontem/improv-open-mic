@@ -35,19 +35,29 @@ class CreateReview extends Component {
 	handleSubmit(e){
 		e.preventDefault();
 
-		// handling form data
-		var form = new FormData();
-		form.append('title', this.refs.title.getValue());
-		form.append('body', this.refs.body.getValue());
-		form.append('open_mic_id', this.state.select);
-  		form.append('photo', this.state.accepted[0]);
-  		form.append('tagOne', this.state.tagOne);
-  		form.append('tagTwo', this.state.tagTwo);
-  		for (var pair of form.entries()) {
-    console.log(pair[0]+ ', ' + pair[1]); 
-}
-  		// creating post request
-	 	this.props.createReview(form);
+		if (this.validate()){
+			// handling form data
+			var form = new FormData();
+			form.append('title', this.refs.title.getValue());
+			form.append('body', this.refs.body.getValue());
+			form.append('open_mic_id', this.state.select);
+	  		form.append('photo', this.state.accepted[0]);
+	  		form.append('tagOne', this.state.tagOne);
+	  		form.append('tagTwo', this.state.tagTwo);
+	  		// creating post request
+		 	this.props.createReview(form);
+		 } else {
+
+		 }
+	}
+
+	validate(){
+		return Object.keys(this.refs).every((key)=>{
+			return this.refs[key].getValue();
+		}) 
+		&& this.state.tagOne 
+		&& this.state.tagTwo 
+		&& this.state.select;
 	}
 
 	onDrop(files) {
@@ -57,7 +67,7 @@ class CreateReview extends Component {
 	}
 
 	render(){
-		if (this.props.forum.success) return (<Redirect to={`/forum/thread/${this.props.forum.createPost.insertId}`}/>)
+		if (this.props.review.success) return (<Redirect to={`/reviews/id/${this.props.review.data.insertId}`}/>)
 
 		return (
 			<div>
@@ -66,13 +76,12 @@ class CreateReview extends Component {
 					<Card>
 						<Subheader>Create a New Review</Subheader>
 						<div style={{padding: '0px 20px 20px'}}>
-							<form onSubmit={this.handleSubmit.bind(this)} ref="form">
+							<form onSubmit={this.handleSubmit.bind(this)}>
 								<SelectField
 									value={this.state.select}
 							        maxHeight={200}
 							        fullWidth={true}
 							        floatingLabelText="Select Jam to Review"
-							        ref="jam_id"
 							        onChange={this.handleJamSelect.bind(this)}
 							      >
 							        {this.props.openMics.items.map((item) => <MenuItem value={item.id} key={item.id} primaryText={item.title} /> )}
@@ -100,6 +109,7 @@ class CreateReview extends Component {
 							        fullWidth={false}
 							        floatingLabelText="Pick a tag"
 							        onChange={this.handleTagOne.bind(this)}
+							        errorText="This field is required"
 							      	>
 										{this.props.tags.data.map((item) => <MenuItem value={item.id} key={item.id} primaryText={item.title} /> )}
 									</SelectField>
@@ -109,6 +119,7 @@ class CreateReview extends Component {
 									fullWidth={false}
 									floatingLabelText="Pick a tag"
 									onChange={this.handleTagTwo.bind(this)}
+									errorText="This field is required"
 									>
 										{this.props.tags.data.map((item) => <MenuItem value={item.id} key={item.id} primaryText={item.title} /> )}
 									</SelectField>

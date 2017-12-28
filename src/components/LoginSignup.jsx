@@ -8,6 +8,7 @@ import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-a
 import { Redirect } from 'react-router-dom';
 import Dropzone from 'react-dropzone';
 import Alert from './Alert';
+import swal from 'sweetalert'
 
 class LoginSignup extends Component {
 	componentWillMount(){
@@ -50,23 +51,40 @@ class LoginSignup extends Component {
 		}
 	}
 
+	validate(){
+		if (this.props.signUp){
+			return this.refs.email.getValue() && this.refs.password.getValue()
+					&& this.refs.username.getValue() && this.refs.city.getValue();
+		} else {
+			return this.refs.email.getValue() && this.refs.password.getValue();
+		}
+	}
+
 	login(){
-		this.props.dispatchLogin({
-  			email: this.refs.email.getValue(),
-  			password: this.refs.password.getValue()
-  		});
+		if (this.validate()){
+			this.props.dispatchLogin({
+	  			email: this.refs.email.getValue().trim(),
+	  			password: this.refs.password.getValue()
+	  		});
+		} else {
+			swal("Oops!", "Please fill out all fields!", "error")
+		}
 	}
 
 	signup(){
-		// handling form data
-		var form = new FormData();
-		form.append('email', this.refs.email.getValue());
-		form.append('password', this.refs.password.getValue());
-		form.append('username', this.refs.username.getValue());
-		form.append('city', this.refs.city.getValue());
-  		form.append('photo', this.state.accepted[0]);
+		if (this.validate()){
+			// handling form data
+			var form = new FormData();
+			form.append('email', this.refs.email.getValue().trim());
+			form.append('password', this.refs.password.getValue());
+			form.append('username', this.refs.username.getValue());
+			form.append('city', this.refs.city.getValue());
+	  		form.append('photo', this.state.accepted[0]);
 
-  		this.props.dispatchSignUp(form);
+	  		this.props.dispatchSignUp(form);
+	  	} else {
+
+	  	}
 	}
 
 	onDrop(files) {
@@ -81,7 +99,8 @@ class LoginSignup extends Component {
 
 
 	render(){
-		{this.props.auth.error && <Alert error={true} message={this.props.auth.errorMessage} />}
+		if (this.props.auth.error) swal("Oops!", this.props.auth.errorMessage, "error");
+		if (this.props.auth.success) swal("Welcome!", "Successfully logged in.", "success");
 
 		return (
 			<div>

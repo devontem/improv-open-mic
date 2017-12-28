@@ -22,12 +22,6 @@ import AccountContainer from './containers/AccountContainer';
 const customHistory = createBrowserHistory();
 
 class App extends Component {
-  componentWillMount(){
-    this.state = {
-      logged: false
-    };
-  }
-
   loggedIn(){
     return localStorage.getItem('imp-tok') && localStorage.getItem('imp-uid');
   }
@@ -36,7 +30,7 @@ class App extends Component {
     return (
         <Provider store={store}>
           <Router history={customHistory}>
-            <Layout loggedIn={this.loggedIn.bind(this)()}>
+            <Layout loggedIn={this.loggedIn()}>
               <Route exact path="/forum" component={ForumContainer} />
               <Route exact path="/forum/new" component={NewForumPostContainer} />
               <Route exact path="/forum/thread/:id" component={ForumThreadContainer} />

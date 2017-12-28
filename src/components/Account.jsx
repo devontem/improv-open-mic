@@ -11,10 +11,21 @@ class Account extends Component {
 	handleSubmit(e){
 		e.preventDefault();
 		var id = localStorage.getItem('imp-uid');
-		this.props.updateProfile(id, {
-			username: this.refs.username.getValue(),
-			email: this.refs.email.getValue(),
-			password: this.refs.password.getValue()
+
+		if (this.validate()){
+			this.props.updateProfile(id, {
+				username: this.refs.username.getValue(),
+				email: this.refs.email.getValue(),
+				password: this.refs.password.getValue()
+			});
+		} else {
+
+		}
+	}
+
+	validate(){
+		return Object.keys(this.refs).every((key)=>{
+			return this.refs[key].getValue();
 		});
 	}
 
@@ -27,7 +38,7 @@ class Account extends Component {
 					<Card>
 						<Subheader>Update Account</Subheader>
 						<div style={{padding: '0px 20px 20px'}}>
-							<form onSubmit={this.handleSubmit.bind(this)} ref="form">
+							<form onSubmit={this.handleSubmit.bind(this)}>
 								<TextField
 							      hintText="Enter Here"
 							      floatingLabelText="Username"

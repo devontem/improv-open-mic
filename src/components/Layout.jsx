@@ -13,20 +13,21 @@ import Login from './Login';
 import Menu from './Menu';
 
 const Layout = (props) => {
+	var loggedIn = localStorage.getItem('imp-tok') && localStorage.getItem('imp-uid');
 	return (
 		<MuiThemeProvider>
 			<div>
 				<AppBar
 				title={<a className="app-bar-title" href="/">Improv Jam Open Mics</a>}
 				iconElementLeft={<IconButton><HappyFaceIcon /></IconButton>}
-				iconElementRight={props.loggedIn ? <Logged {...this.props} /> : <Login />}
+				iconElementRight={loggedIn ? <Logged {...this.props} /> : <Login />}
 				/>
 
 				<div className="container-fluid">
 
 					{ (props.showMenu || true) ?
 						<div style={{ marginTop: '30px' }}>
-							<div className="col-sm-3"><Menu loggedIn={props.loggedIn} /></div>
+							<div className="col-sm-3"><Menu loggedIn={loggedIn} /></div>
 							<div className="col-sm-9">{props.children}</div>
 						</div> :
 						<div>

@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 				payload: axios.post('http://localhost:8080/api/open-mics', form, {
 					headers: {'x-access-token': localStorage.getItem('imp-tok') }
 				})
-			})
+			});
 		}
 	}
 };
@@ -26,7 +26,7 @@ class CreateJamContainer extends Component {
 	loggedIn(){
 		return localStorage.getItem('imp-tok') && localStorage.getItem('imp-uid');
 	}
-	
+
 	render(){
 		return <CreateJam loggedIn={this.loggedIn()} {...this.props} />
 	}

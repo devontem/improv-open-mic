@@ -12,30 +12,40 @@ class CreateJam extends Component {
 		if (!this.props.loggedIn) this.props.history.push('/login');
 	}
 
+	validate(){
+		return Object.keys(this.refs).every((key)=>{
+			return this.refs[key].getValue();
+		});
+	}
+
 	handleSubmit(e){
 		e.preventDefault();
+		
   		// creating post request
-		this.props.createJam({
-			title: this.refs.title.getValue(),
-			venue: this.refs.venue.getValue(),
-			day_of_week: this.refs.day_of_week.getValue(),
-			start_time: this.refs.start_time.getValue(),
-			end_time: this.refs.end_time.getValue(),
-			city: this.refs.city.getValue(),
-			country: this.refs.country.getValue()
-		});
-		// reset form
+  		if (this.validate()) {
+  			this.props.createJam({
+				title: this.refs.title.getValue(),
+				venue: this.refs.venue.getValue(),
+				day_of_week: this.refs.day_of_week.getValue(),
+				start_time: this.refs.start_time.getValue(),
+				end_time: this.refs.end_time.getValue(),
+				city: this.refs.city.getValue(),
+				country: this.refs.country.getValue()
+			});
+  		} else {
+  			// error
+  		}
 	}
 
 	render(){
-		console.log(this.props)
+		if (this.props.openMics.success) return (<Redirect to={`/jams/id/${this.props.openMics.items.insertId}`}/>)
 		return (
 			<div>
 				<FlatButton href="/jams" label="GO BACK" labelPosition="after" primary={true} icon={<HardwareKeyboardArrowLeft />}/>
 				<Card>
 					<Subheader>Create a New Jam Page</Subheader>
 					<div style={{padding: '0px 20px 20px'}}>
-						<form onSubmit={this.handleSubmit.bind(this)} ref="form">
+						<form onSubmit={this.handleSubmit.bind(this)}>
 							<TextField
 						      hintText="Enter Here"
 						      floatingLabelText="Title"
@@ -45,6 +55,7 @@ class CreateJam extends Component {
 						    />
 						    <TextField
 						      floatingLabelText="Venue"
+						      hintText="The Improv Comedy Theatre"
 						      floatingLabelFixed={true}
 						      multiLine={true}
 						      ref="venue"

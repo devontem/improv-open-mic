@@ -12,13 +12,22 @@ class NewForumPost extends Component {
 		if (!this.props.loggedIn) this.props.history.push('/login');
 	}
 
+	validate(){
+		return Object.keys(this.refs).every((key)=>{
+			return this.refs[key].getValue();
+		});
+	}
+
 	handleSubmit(e){
 		e.preventDefault();
-		this.props.createForumPost({
-			title: this.refs.title.getValue(),
-			body: this.refs.body.getValue(),
-			date: new Date()
-		});
+
+		if (this.validate()){
+			this.props.createForumPost({
+				title: this.refs.title.getValue(),
+				body: this.refs.body.getValue(),
+				date: new Date()
+			});
+		}
 	}
 
 	render(){
@@ -47,6 +56,7 @@ class NewForumPost extends Component {
 						      rows={1}
 						      rowsMax={6}
 						      fullWidth={true}
+						      errorText="This field is required"
 						    />
 						    <RaisedButton label="Submit" type="submit" primary={true} style={{margin: '12px'}} />
 						</form>
