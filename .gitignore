@@ -21,4 +21,7 @@ yarn-debug.log*
 yarn-error.log*
 
 server/config/config.js
-public/image_uploads
+/public/image_uploads/*
+
+#exceptions
+!/public/image_uploads/.gitkeep 
