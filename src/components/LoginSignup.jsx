@@ -1,14 +1,10 @@
 import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
-import Card, {CardTitle} from 'material-ui/Card';
+import Card from 'material-ui/Card';
 import Subheader from 'material-ui/Subheader';
 import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
-import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
-import { Redirect } from 'react-router-dom';
 import Dropzone from 'react-dropzone';
-import Alert from './Alert';
-import swal from 'sweetalert'
+import swal from 'sweetalert';
 
 class LoginSignup extends Component {
 	componentWillMount(){
@@ -31,9 +27,6 @@ class LoginSignup extends Component {
 			// Setting the token & user is
 			localStorage.setItem('imp-tok', this.props.auth.token);
 			localStorage.setItem('imp-uid', this.props.auth.user.id);
-
-			//showing the confirmation message
-			// swal("Welcome Back", "You are now logged in", "success")
 
 			// redirecting to the user's home page
 			var id = this.props.auth.user.id;
@@ -67,7 +60,7 @@ class LoginSignup extends Component {
 	  			password: this.refs.password.getValue()
 	  		});
 		} else {
-			swal("Oops!", "Please fill out all fields!", "error")
+			swal("Oops!", "Please fill out all fields!", "error");
 		}
 	}
 
@@ -83,7 +76,7 @@ class LoginSignup extends Component {
 
 	  		this.props.dispatchSignUp(form);
 	  	} else {
-
+	  		swal("Oops!", "Please fill out all fields!", "error");
 	  	}
 	}
 
@@ -121,6 +114,7 @@ class LoginSignup extends Component {
 						      floatingLabelFixed={true}
 						      fullWidth={true}
 						      ref="password"
+						      type="password"
 						    />
 
 						    { this.props.signUp && 
@@ -167,6 +161,10 @@ class LoginSignup extends Component {
 
 						    }
 						    <RaisedButton label="Submit" type="submit" primary={true} style={{margin: '12px'}} />
+
+						    { (this.props.signUp) ?
+						    	<p style={{marginTop: '30px'}}>Already registered? Click <a href='login'>here</a> to log in</p> :
+						    	<p style={{marginTop: '30px'}}>Not registered? Click <a href='login?signup=true'>here</a> to sign up</p> }
 						</form>
 						</div>
 				</Card>

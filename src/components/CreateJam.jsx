@@ -1,15 +1,19 @@
 import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
-import Card, {CardTitle} from 'material-ui/Card';
+import Card from 'material-ui/Card';
 import Subheader from 'material-ui/Subheader';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
 import { Redirect } from 'react-router-dom';
+import swal from 'sweetalert';
 
 class CreateJam extends Component {
 	componentWillMount(){
-		if (!this.props.loggedIn) this.props.history.push('/login');
+		if (!this.props.loggedIn) {
+			swal("Oops!", "Please log in or sign up", "error");
+			this.props.history.push('/login');
+		}
 	}
 
 	validate(){
@@ -33,12 +37,16 @@ class CreateJam extends Component {
 				country: this.refs.country.getValue()
 			});
   		} else {
-  			// error
+  			swal("Oops!", "Please fill out all fields!", "error");
   		}
 	}
 
 	render(){
-		if (this.props.openMics.success) return (<Redirect to={`/jams/id/${this.props.openMics.items.insertId}`}/>)
+		if (this.props.openMics.success) {
+			swal("Success!", "Your jam has been created.", "success");
+			return (<Redirect to={`/jams/id/${this.props.openMics.items.insertId}`}/>);
+		}
+		if (this.props.openMics.error) swal("Error!", "There was a problem with your submission. Please try again later.", "error");
 		return (
 			<div>
 				<FlatButton href="/jams" label="GO BACK" labelPosition="after" primary={true} icon={<HardwareKeyboardArrowLeft />}/>

@@ -5,7 +5,7 @@ const tagsReducer = (state = {}, action) => {
 		case 'GET_TAGS':
 			return state;
 		case 'GET_TAGS_PENDING':
-			return {...state, pending: true, success: false};
+			return {...state, pending: true, success: false, error:false };
 		case 'GET_TAGS_FULFILLED':
 			return {...state, pending: false, ...action.payload.data, success: true };
 		case 'GET_TAGS_REJECTED':
@@ -15,9 +15,9 @@ const tagsReducer = (state = {}, action) => {
 		case 'GET_USED_TAGS':
 			return state;
 		case 'GET_USED_TAGS_PENDING':
-			return {...state, pending: true, success: false};
+			return {...state, pending: true, success: false, error:false};
 		case 'GET_USED_TAGS_FULFILLED':
-			return {...state, pending: false, usedTags: action.payload.data.data, success: true };
+			return {...state, pending: false, usedTags: action.payload.data.data, success: true, error:false };
 		case 'GET_USED_TAGS_REJECTED':
 			message = (action.payload.message) ? action.payload.message : 'An error has occured. Please try again later.';
 			return { error: true, errorMessage: message, success: false };

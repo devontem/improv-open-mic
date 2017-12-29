@@ -1,23 +1,12 @@
 import React, { Component } from "react";
-import {blue500, yellow600, deepOrange500} from 'material-ui/styles/colors';
 import Avatar from 'material-ui/Avatar';
-import EditorInsertChart from 'material-ui/svg-icons/editor/insert-chart';
-import ActionAssignment from 'material-ui/svg-icons/action/assignment';
 import {List, ListItem} from 'material-ui/List';
-import ActionInfo from 'material-ui/svg-icons/action/info';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
-import FileFolder from 'material-ui/svg-icons/file/folder';
 import Alert from './Alert';
 import IconButton from 'material-ui/IconButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-import ContentAddBox from 'material-ui/svg-icons/content/add-box';
 import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
-import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {Card, CardTitle, CardText} from 'material-ui/Card';
 import {
   Table,
   TableBody,
@@ -66,7 +55,6 @@ const nestedItem = (item) => {
 
 class Jam extends Component {
 	render() {
-		var imgUrl = (this.props.review.review) ? this.props.review.review.photo : '';
 		return (
 			<div>
 				{this.props.review.error && <Alert error={true} message={this.props.review.errorMessage} />}
@@ -87,7 +75,7 @@ class Jam extends Component {
 					          titleStyle={styles.titleStyle}
 					          titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
 					        >
-					          <img src={item.photo} />
+					          <img src={item.photo} alt="" />
 					        </GridTile>
 					      )).slice(0,4)}
 					    </GridList> }

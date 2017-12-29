@@ -7,7 +7,7 @@ var config = require('./../config/config');
 var PLACEHOLDER_IMG = 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png';
 
 module.exports.login = function(req, res){
-	var email = req.body.email;
+	var email = req.body.email.toLowerCase();
 	var pw = req.body.password;
 
 	// async connection to database
@@ -59,7 +59,7 @@ module.exports.login = function(req, res){
 }
 
 module.exports.signUp = function(req, res){
-	var email = req.body.email;
+	var email = req.body.email.toLowerCase();
 	var data = req.body;
     console.log('req.body', req.body, req.files);
 
@@ -102,7 +102,7 @@ module.exports.signUp = function(req, res){
                 }
 
                 // adjusting fields
-                data.email = connection.escape(data.email);
+                data.email = connection.escape(data.email.toLowerCase());
                 data.password = hashPassword(data.password);
                 data.join_date = new Date();
                 data.photo = image_path || PLACEHOLDER_IMG;

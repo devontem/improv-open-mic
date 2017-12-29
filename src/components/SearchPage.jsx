@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
-import Card, {CardTitle} from 'material-ui/Card';
+import Card from 'material-ui/Card';
 import Divider from 'material-ui/Divider';
 import {List, ListItem} from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
-import RaisedButton from 'material-ui/RaisedButton';
 
 class SearchPage extends Component {
 

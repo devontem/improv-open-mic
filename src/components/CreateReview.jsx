@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
-import Card, {CardTitle} from 'material-ui/Card';
+import Card from 'material-ui/Card';
 import Subheader from 'material-ui/Subheader';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
@@ -9,6 +9,7 @@ import { Redirect } from 'react-router-dom';
 import Dropzone from 'react-dropzone';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import swal from 'sweetalert';
 
 class CreateReview extends Component {
 	componentWillMount(){
@@ -20,7 +21,10 @@ class CreateReview extends Component {
 			tagTwo: null
 		}
 
-		if (!this.props.loggedIn) this.props.history.push('/login');
+		if (!this.props.loggedIn) {
+			swal("Oops!", "Please log in or sign up", "error");
+			this.props.history.push('/login');
+		}
 	}
 
 	handleJamSelect(e, i, value){
@@ -47,7 +51,7 @@ class CreateReview extends Component {
 	  		// creating post request
 		 	this.props.createReview(form);
 		 } else {
-
+		 	swal("Oops!", "Please fill out all fields!", "error");
 		 }
 	}
 
@@ -67,7 +71,12 @@ class CreateReview extends Component {
 	}
 
 	render(){
-		if (this.props.review.success) return (<Redirect to={`/reviews/id/${this.props.review.data.insertId}`}/>)
+		if (this.props.review.success) {
+			swal("Success!", "Your review has been created.", "success");
+			return (<Redirect to={`/reviews/id/${this.props.review.data.insertId}`}/>)
+		}
+		if (this.props.review.error) swal("Error!", "There was a problem with your submission. Please try again later.", "error");
+		if (this.props.openMics.error || this.props.tags.error ) swal("Error!", "There was a problem with this request. Please try again later.", "error");
 
 		return (
 			<div>
@@ -109,7 +118,6 @@ class CreateReview extends Component {
 							        fullWidth={false}
 							        floatingLabelText="Pick a tag"
 							        onChange={this.handleTagOne.bind(this)}
-							        errorText="This field is required"
 							      	>
 										{this.props.tags.data.map((item) => <MenuItem value={item.id} key={item.id} primaryText={item.title} /> )}
 									</SelectField>
@@ -119,7 +127,6 @@ class CreateReview extends Component {
 									fullWidth={false}
 									floatingLabelText="Pick a tag"
 									onChange={this.handleTagTwo.bind(this)}
-									errorText="This field is required"
 									>
 										{this.props.tags.data.map((item) => <MenuItem value={item.id} key={item.id} primaryText={item.title} /> )}
 									</SelectField>

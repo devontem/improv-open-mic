@@ -2,9 +2,7 @@ import React, {Component} from 'react';
 import Alert from './Alert';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import Subheader from 'material-ui/Subheader';
 import Avatar from 'material-ui/Avatar';
-import {grey400, darkBlack, lightBlack} from 'material-ui/styles/colors';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
@@ -72,7 +70,7 @@ class ForumThread extends Component {
 							        			primaryText={<h4 style={{margin: '0px'}}><a href={`/profile/${item.author_id}`}>{item.username}</a></h4>}
 							        			secondaryTextLines={2}
 							      				secondaryText={secondaryText(item)}
-							      				{...this.props.loggedIn && this.props.loggedInUser == item.author_id && {rightIconButton: 
+							      				{...this.props.loggedIn && parseInt(this.props.loggedInUser, 10) === item.author_id && {rightIconButton: 
 							        				(<IconMenu iconButtonElement={iconButtonElement}>
 														   	<MenuItem onClick={this.props.deletePost.bind(this, item.id, this.props.forum.thread.forum_post.id)}>Delete</MenuItem>
 														  </IconMenu>)

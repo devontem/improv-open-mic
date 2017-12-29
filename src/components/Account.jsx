@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
-import Card, {CardTitle} from 'material-ui/Card';
+import Card from 'material-ui/Card';
 import Subheader from 'material-ui/Subheader';
 import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
-import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
-import { Redirect } from 'react-router-dom';
+import swal from 'sweetalert';
 
 class Account extends Component {
 	handleSubmit(e){
@@ -19,7 +17,7 @@ class Account extends Component {
 				password: this.refs.password.getValue()
 			});
 		} else {
-
+			swal("Oops!", "Please fill out all fields!", "error");
 		}
 	}
 
@@ -33,7 +31,6 @@ class Account extends Component {
 
 		return (
 			<div>
-				<FlatButton href="/forum" label="GO BACK" labelPosition="after" primary={true} icon={<HardwareKeyboardArrowLeft />}/>
 				{ this.props.profile.data &&
 					<Card>
 						<Subheader>Update Account</Subheader>

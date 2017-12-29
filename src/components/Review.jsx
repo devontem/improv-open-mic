@@ -1,25 +1,16 @@
 import React, { Component } from "react";
-import {blue500, yellow600, deepOrange500} from 'material-ui/styles/colors';
 import Avatar from 'material-ui/Avatar';
-import EditorInsertChart from 'material-ui/svg-icons/editor/insert-chart';
-import ActionAssignment from 'material-ui/svg-icons/action/assignment';
 import {List, ListItem} from 'material-ui/List';
-import ActionInfo from 'material-ui/svg-icons/action/info';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
-import FileFolder from 'material-ui/svg-icons/file/folder';
 import Alert from './Alert';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
-import ContentAddBox from 'material-ui/svg-icons/content/add-box';
 import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
-import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {Card, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
-import HappyFaceIcon from 'material-ui/svg-icons/social/sentiment-very-satisfied';
 
 const iconButtonElement = (
   <IconButton
@@ -59,20 +50,20 @@ class Review extends Component {
 					(<Card>
 						<Subheader>Review Page</Subheader>
 					    <CardHeader
-					      title={`Reviewed By: ${this.props.review.review.username}`}
-					      subtitle={`Jam Reviewed: ${this.props.review.review.jamTitle} in ${this.props.review.review.city}`}
+					      subtitle={<div>Reviewed By: <h3 style={{margin:'0px', display: 'inline-block'}}><a href={`/profile/${this.props.review.review.author_id}`}>{`${this.props.review.review.username}`}</a></h3></div>}
+					      title={<div>Jam Reviewed: <h3 style={{margin:'0px', display: 'inline-block'}}><a href={`/jams/id/${this.props.review.review.open_mic_id}`}>{`${this.props.review.review.jamTitle}`}</a></h3></div>}
 					      avatar={<Avatar src={this.props.review.review.userPhoto} />}
 		      				/>)
 					    />
 					    <Divider />
 					    <RaisedButton href={`/profile/${this.props.review.review.author_id}`} label={`Visit ${this.props.review.review.username}'s Profile`} type="submit" primary={true} style={{margin: '12px'}} />
 					    <RaisedButton href={`/jams/id/${this.props.review.review.open_mic_id}`} label={`Visit Jam Page`} type="submit" primary={true} style={{margin: '12px'}} />
-					    { this.props.loggedIn && this.props.loggedInUser == this.props.review.review.author_id && 
+					    { this.props.loggedIn && parseInt(this.props.loggedInUser,10) === this.props.review.review.author_id && 
 					    		<RaisedButton onClick={this.props.deleteReview.bind(this, this.props.review.review.id)} label={`Delete Review`} primary={false} style={{margin: '12px'}}/>}
 					    <CardMedia
 					      overlay={<CardTitle title={'Review: ' + this.props.review.review.title} />}
 					    >
-					      <img src={imgUrl} alt="Jam Image" />
+					      <img src={imgUrl} alt="" />
 					    </CardMedia>
 					    <Subheader>Review Body</Subheader>
 					    <CardText>
@@ -90,7 +81,7 @@ class Review extends Component {
 										        			primaryText={<h4 style={{margin: '0px'}} ><a href={`/profile/${item.author_id}`}>{item.username}</a></h4>}
 										        			secondaryTextLines={2}
 										        			secondaryText={secondaryText(item)}
-										        			{...this.props.loggedIn && this.props.loggedInUser == item.userId && {rightIconButton: 
+										        			{...this.props.loggedIn && parseInt(this.props.loggedInUser, 10) === item.userId && {rightIconButton: 
 										        				(<IconMenu iconButtonElement={iconButtonElement}>
 																	   	<MenuItem onClick={this.props.deleteComment.bind(this, item.id, this.props.review.review.id)}>Delete</MenuItem>
 																	  </IconMenu>)

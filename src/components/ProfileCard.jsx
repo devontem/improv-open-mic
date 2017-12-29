@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {Card, CardHeader, CardTitle} from 'material-ui/Card';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
 import Avatar from 'material-ui/Avatar';
@@ -8,12 +8,14 @@ import RaisedButton from 'material-ui/RaisedButton';
 class ProfileCard extends Component {
 
 	isFollowing(){
-		return (this.props.user.following) ? this.props.user.following.map(item => item.followee).includes(parseInt(this.props.match.params.id)) : false;
+		return (this.props.user.following) ? this.props.user.following.map(item => item.followee).includes(parseInt(this.props.match.params.id, 10)) : false;
 	}
 
 	handleClick(e){
 		e.preventDefault();
 		var profileId = this.props.match.params.id;
+
+		console.log(this.props)
 
 		if (this.props.isFollowing){
 			this.props.unfollow({

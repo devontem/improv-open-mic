@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {Card} from 'material-ui/Card';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
 import Avatar from 'material-ui/Avatar';
@@ -19,7 +19,7 @@ const nestedItem = (item, i) => {
 			 <div key={item.id}>
 			 	<ListItem	
 	        			leftIcon={<Avatar src={item.photo} />} 
-	        			primaryText={`${item.jamTitle} - "${item.reviewTitle}"`}
+	        			primaryText={<h3 style={{margin: '0px'}}><a href={`/reviews/id/${item.id}`}>{`${item.jamTitle} - "${item.reviewTitle}"`}</a></h3>}
 	        			secondaryTextLines={2}
 	      				secondaryText={secondaryText(item)}/>
 	      	<Divider />

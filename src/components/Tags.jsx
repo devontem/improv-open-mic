@@ -1,25 +1,10 @@
 import React, {Component} from 'react';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {Card} from 'material-ui/Card';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
-import Avatar from 'material-ui/Avatar';
-import RaisedButton from 'material-ui/RaisedButton';
 import Chip from 'material-ui/Chip';
-import {List, ListItem} from 'material-ui/List';
-import ContentInbox from 'material-ui/svg-icons/content/inbox';
-import ActionGrade from 'material-ui/svg-icons/action/grade';
-import ContentSend from 'material-ui/svg-icons/content/send';
-import ContentDrafts from 'material-ui/svg-icons/content/drafts';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import ContentAddCircle from 'material-ui/svg-icons/content/add-circle';
-import ActionNoteAdd from 'material-ui/svg-icons/action/note-add';
-import CommunicationForum from 'material-ui/svg-icons/communication/forum';
-import ActionSearch from 'material-ui/svg-icons/action/search';
+import {ListItem} from 'material-ui/List';
 import ActionHome from 'material-ui/svg-icons/action/home';
-import SocialPublic from 'material-ui/svg-icons/social/public';
-import SocialPeople from 'material-ui/svg-icons/social/people';
-import ActionStore from 'material-ui/svg-icons/action/store';
-import ActionViewModule from 'material-ui/svg-icons/action/view-module';
 import NavigationChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
 
 const chipStyles = {
