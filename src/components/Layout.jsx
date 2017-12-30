@@ -17,24 +17,16 @@ const Layout = (props) => {
 		<MuiThemeProvider>
 			<div>
 				<AppBar
-				title={<a className="app-bar-title" href="/">Improv Jam Open Mics</a>}
+				title={<a className="app-bar-title" style={{fontFamily: "'Open Sans', sans-serif", fontWeight: 'bold'}} href="/">Improv Jam Open Mics</a>}
 				iconElementLeft={<IconButton><HappyFaceIcon /></IconButton>}
 				iconElementRight={loggedIn ? <Logged {...this.props} /> : <Login />}
 				/>
 
 				<div className="container-fluid">
-
-					{ (props.showMenu || true) ?
-						<div style={{ marginTop: '30px' }}>
-							<div className="col-sm-3"><Menu loggedIn={loggedIn} /></div>
-							<div className="col-sm-9">{props.children}</div>
-						</div> :
-						<div>
-							<div className="col-sm-12">{props.children}</div>
-						</div>
-					}
-					<div className="col-sm-4"></div>
-					<div className="col-sm-8"></div>
+					<div style={{ marginTop: '30px' }}>
+						<div className="col-sm-3"><Menu loggedIn={loggedIn} /></div>
+						<div className="col-sm-9">{props.children}</div>
+					</div> 
 				</div>
 			</div>
 		</MuiThemeProvider>

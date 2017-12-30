@@ -77,7 +77,7 @@ class Jam extends Component {
 					        >
 					          <img src={item.photo} alt="" />
 					        </GridTile>
-					      )).slice(0,4)}
+					      ))}
 					    </GridList> }
 					    <CardText>
 					      <Table displaySelectAll={false} adjustForCheckbox={false}>

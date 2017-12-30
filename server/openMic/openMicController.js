@@ -120,4 +120,32 @@ module.exports.deleteOpenMic = function(req, res){
     });
 }
 
+module.exports.getHomepage = function(req, res){
+    var id = req.body.id;
+    // async connection to database
+    database.then(function(connection){
+        // query database 
+        connection.query('SELECT * FROM `users` LIMIT 10' , function(error, users, fields) {
+            if (error) {
+                console.log(error)
+                res.status(400).send({ data: error });
+                return;
+            }
+
+            connection.query('SELECT reviews.title, reviews.body, reviews.date, reviews.id, reviews.author_id, reviews.photo, u.username FROM reviews r, users u INNER JOIN reviews ON reviews.author_id = u.id group by reviews.id LIMIT 10', function(error1, reviews, fields1) {
+            if (error1) {
+                console.log(error1)
+                res.status(400).send({ data: error1 });
+                return;
+            }
+
+            res.status(200).send({ 
+                reviews: reviews,
+                users: users
+            });
+        });
+        });
+    });
+}
+
 

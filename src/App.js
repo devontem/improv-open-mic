@@ -18,6 +18,7 @@ import ProfileContainer from './containers/ProfileContainer';
 import LoginSignUpContainer from './containers/LoginSignupContainer';
 import TagsContainer from './containers/TagsContainer';
 import AccountContainer from './containers/AccountContainer';
+import HomePageContainer from './containers/HomePageContainer';
 
 const customHistory = createBrowserHistory();
 
@@ -51,6 +52,8 @@ class App extends Component {
 
               <Route exact path="/tags" component={TagsContainer} />
               <Route exact path="/account" component={AccountContainer} />
+
+              <Route exact path="/" component={HomePageContainer} />
             </Layout>
           </Router>
         </Provider>

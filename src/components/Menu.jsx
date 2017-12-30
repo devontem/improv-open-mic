@@ -19,12 +19,12 @@ const Menu = (props) => {
 	return (
 		<Card>
 			<List>
-		      <ListItem primaryText="Home" leftIcon={<ActionHome />} />
+		      <ListItem primaryText="Home" href="/" leftIcon={<ActionHome />} />
 		      <ListItem primaryText="Forum" href="/forum" leftIcon={<CommunicationForum />} />
 					<ListItem primaryText="Search" href="/search" leftIcon={<ActionSearch />} />
 					<ListItem primaryText="All Jams" href="/jams" leftIcon={<ActionAccessibility />} />
-					<ListItem primaryText="Tags" href="/tags"  leftIcon={<ActionViewModule />} />
-					<ListItem primaryText="Countries" href="/jams?country=true" leftIcon={<SocialPublic />} />
+					<ListItem primaryText="Jam Tags" href="/tags"  leftIcon={<ActionViewModule />} />
+					<ListItem primaryText="Jams by Country" href="/jams?country=true" leftIcon={<SocialPublic />} />
 		      <Divider />
 		      <ListItem primaryText="Add Jam" href="/jams/new" leftIcon={<ContentAddCircle />} />
 		      <ListItem primaryText="Add Review" href="/reviews/new" leftIcon={<ActionNoteAdd />} />

@@ -3,9 +3,9 @@ import FlatButton from 'material-ui/FlatButton';
 
 const Login = (props) => {
 	return (
-		<div>
-			<FlatButton {...this.props} href="/login" label="Login" />
-			<FlatButton {...this.props} href="/login?signup=true" label="Sign Up" />
+		<div style={{color: 'white'}}>
+			<FlatButton style={{color: 'white'}} {...this.props} href="/login" label="Login" />
+			<FlatButton style={{color: 'white'}} {...this.props} href="/login?signup=true" label="Sign Up" />
 		</div>
 	);
 };
