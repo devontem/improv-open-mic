@@ -76,7 +76,7 @@ class HomePage extends Component {
 										{this.props.homepage.users.map((item) => {
 											return (<div style={{margin: '20px', display: 'inline-block'}} key={item.id}>
 														<a href={`/profile/${item.id}`}>
-															<Avatar src={require(`${item.photo}`)} size={40} /> <br />
+															<Avatar src={process.env.PUBLIC_URL + item.photo} size={40} /> <br />
 															<small style={{textAlign: 'center', color: 'white'}}>{item.username}</small>
 														</a>
 													</div>);
