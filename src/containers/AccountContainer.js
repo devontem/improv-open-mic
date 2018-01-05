@@ -15,13 +15,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		getProfile: function(id){
 			dispatch({
 				type: 'GET_PROFILE',
-				payload: axios.get('http://localhost:8080/api/users/'+id)
+				payload: axios.get('/api/users/'+id)
 			});
 		},
 		updateProfile: function(id, form){
 			dispatch({
 				type: 'UPDATE_PROFILE',
-				payload: axios.put('http://localhost:8080/api/users/' + id, form, {
+				payload: axios.put('/api/users/' + id, form, {
 					headers: {'x-access-token': localStorage.getItem('imp-tok') }
 				})
 			})

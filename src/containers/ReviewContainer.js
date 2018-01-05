@@ -14,13 +14,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		getReviewById: function(id){
 			dispatch({
 				type: 'GET_REVIEW',
-				payload: axios.get('http://localhost:8080/api/reviews/'+id)
+				payload: axios.get('/api/reviews/'+id)
 			});
 		},
 		submitComment: function(form){
 			dispatch({
 				type: 'SUBMIT_REVIEW_REPLY_COMMENT',
-				payload: axios.post('http://localhost:8080/api/reviews/review-reply', form, {
+				payload: axios.post('/api/reviews/review-reply', form, {
 					headers: {'x-access-token': localStorage.getItem('imp-tok') }
 				})
 			})
@@ -28,21 +28,21 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 			.then(() => {
 				dispatch({
 					type: 'GET_REVIEW',
-					payload: axios.get('http://localhost:8080/api/reviews/' + form.review_id)
+					payload: axios.get('/api/reviews/' + form.review_id)
 				});
 			});
 		},
 		deleteComment: function(id, review_id){
 			dispatch({
 				type: 'DELETE_REVIEW_REPLY',
-				payload: axios.delete('http://localhost:8080/api/reviews/review-reply/' + id, {
+				payload: axios.delete('/api/reviews/review-reply/' + id, {
 					headers: {'x-access-token': localStorage.getItem('imp-tok') }
 				})
 			})
 			.then(() => {
 				dispatch({
 					type: 'GET_REVIEW',
-					payload: axios.get('http://localhost:8080/api/reviews/'+review_id)
+					payload: axios.get('/api/reviews/'+review_id)
 				});
 			});
 		},
@@ -50,7 +50,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 			console.log('id being deleted', id)
 			dispatch({
 				type: 'DELETE_REVIEW',
-				payload: axios.delete('http://localhost:8080/api/reviews/' + id, {
+				payload: axios.delete('/api/reviews/' + id, {
 					headers: {'x-access-token': localStorage.getItem('imp-tok') }
 				})
 			})

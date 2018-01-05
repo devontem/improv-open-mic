@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		getJamById: function(id){
 			dispatch({
 				type: 'GET_JAM',
-				payload: axios.get('http://localhost:8080/api/open-mics/'+id)
+				payload: axios.get('/api/open-mics/'+id)
 			});
 		}
 	}

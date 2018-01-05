@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		createReview: function(form){
 			dispatch({
 				type: 'CREATE_REVIEW',
-				payload: axios.post('http://localhost:8080/api/reviews', form, {
+				payload: axios.post('/api/reviews', form, {
 					processData: false,
                 	contentType: false,
                 	dataType: 'json',
@@ -25,13 +25,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		getJams: function(id){
 			dispatch({
 				type: 'GET_OPEN_MICS',
-				payload: axios.get('http://localhost:8080/api/open-mics/')
+				payload: axios.get('/api/open-mics/')
 			});
 		},
 		getTags: function(id){
 			dispatch({
 				type: 'GET_TAGS',
-				payload: axios.get('http://localhost:8080/api/reviews/tags/')
+				payload: axios.get('/api/reviews/tags/')
 			});
 		}
 	}

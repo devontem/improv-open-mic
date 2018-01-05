@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		createJam: function(form){
 			dispatch({
 				type: 'CREATE_JAM',
-				payload: axios.post('http://localhost:8080/api/open-mics', form, {
+				payload: axios.post('/api/open-mics', form, {
 					headers: {'x-access-token': localStorage.getItem('imp-tok') }
 				})
 			});

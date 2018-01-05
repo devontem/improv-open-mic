@@ -14,20 +14,20 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		getForumPosts: function(){
 			dispatch({
 				type: 'GET_FORUM_POSTS',
-				payload: axios.get('http://localhost:8080/api/forum')
+				payload: axios.get('/api/forum')
 			});
 		},
 		deletePost: function(id){
 			dispatch({
 				type: 'DELETE_FORUM_POSTS',
-				payload: axios.delete('http://localhost:8080/api/forum/'+id, {
+				payload: axios.delete('/api/forum/'+id, {
 					headers: {'x-access-token': localStorage.getItem('imp-tok') }
 				})
 			})
 			.then(()=>{
 				dispatch({
 					type: 'GET_FORUM_POSTS',
-					payload: axios.get('http://localhost:8080/api/forum')
+					payload: axios.get('/api/forum')
 				});
 			});
 		}

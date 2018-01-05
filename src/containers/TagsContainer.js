@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		getUsedTags: function(form){
 			dispatch({
 				type: 'GET_USED_TAGS',
-				payload: axios.get('http://localhost:8080/api/reviews/tags/used')
+				payload: axios.get('/api/reviews/tags/used')
 			});
 		}
 	}

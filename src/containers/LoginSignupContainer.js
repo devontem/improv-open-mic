@@ -15,13 +15,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		dispatchLogin: function(form){
 			dispatch({
 				type: 'LOGIN',
-				payload: axios.post('http://localhost:8080/api/auth/login', form)
+				payload: axios.post('/api/auth/login', form)
 			});
 		},
 		dispatchSignUp: function(form){
 			dispatch({
 				type: 'SIGN_UP',
-				payload: axios.post('http://localhost:8080/api/auth/signup', form)
+				payload: axios.post('/api/auth/signup', form)
 			});
 		}
 	}

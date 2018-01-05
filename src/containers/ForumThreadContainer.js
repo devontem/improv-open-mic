@@ -16,13 +16,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		getThreadById: function(id){
 			dispatch({
 				type: 'GET_THREAD_POST',
-				payload: axios.get('http://localhost:8080/api/forum/'+id)
+				payload: axios.get('/api/forum/'+id)
 			});
 		},
 		submitComment: function(form){
 			dispatch({
 				type: 'SUBMIT_THREAD_COMMENT',
-				payload: axios.post('http://localhost:8080/api/forum/post-reply', form, {
+				payload: axios.post('/api/forum/post-reply', form, {
 					headers: {'x-access-token': localStorage.getItem('imp-tok') }
 				})
 			})
@@ -30,21 +30,21 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 			.then(() => {
 				dispatch({
 					type: 'GET_THREAD_POST',
-					payload: axios.get('http://localhost:8080/api/forum/' + form.parent_post_id)
+					payload: axios.get('/api/forum/' + form.parent_post_id)
 				});
 			});
 		},
 		deletePost: function(id, thread_id){
 			dispatch({
 				type: 'DELETE_FORUM_POST_REPLY',
-				payload: axios.delete('http://localhost:8080/api/forum/post-reply/'+id, {
+				payload: axios.delete('/api/forum/post-reply/'+id, {
 					headers: {'x-access-token': localStorage.getItem('imp-tok') }
 				})
 			})
 			.then(()=>{
 				dispatch({
 					type: 'GET_THREAD_POST',
-					payload: axios.get('http://localhost:8080/api/forum/'+ thread_id)
+					payload: axios.get('/api/forum/'+ thread_id)
 				});
 			});
 		}

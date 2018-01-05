@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		getOpenMics: function(){
 			dispatch({
 				type: 'GET_OPEN_MICS',
-				payload: axios.get('http://localhost:8080/api/open-mics/')
+				payload: axios.get('/api/open-mics/')
 			});
 		}
 	}

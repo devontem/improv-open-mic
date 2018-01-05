@@ -15,13 +15,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		getProfile: function(id){
 			dispatch({
 				type: 'GET_PROFILE',
-				payload: axios.get('http://localhost:8080/api/users/'+id)
+				payload: axios.get('/api/users/'+id)
 			});
 		},
 		getFollowing: function(id){
 			dispatch({
 				type: 'GET_FOLLOWING',
-				payload: axios.get(`http://localhost:8080/api/users/${id}/following`, {
+				payload: axios.get(`/api/users/${id}/following`, {
 					headers: {'x-access-token': localStorage.getItem('imp-tok') }
 				})
 			});
@@ -29,7 +29,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		follow: function(form){
 			dispatch({
 				type: 'HANDLE_FOLLOW_ACTION',
-				payload: axios.post(`http://localhost:8080/api/users/follow/`, form, {
+				payload: axios.post(`/api/users/follow/`, form, {
 					headers: {'x-access-token': localStorage.getItem('imp-tok') }
 				})
 			})
@@ -41,7 +41,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		unfollow: function(form){
 			dispatch({
 				type: 'HANDLE_FOLLOW_ACTION',
-				payload: axios.post(`http://localhost:8080/api/users/unfollow/`, form, {
+				payload: axios.post(`/api/users/unfollow/`, form, {
 					headers: {'x-access-token': localStorage.getItem('imp-tok') }
 				})
 			})

@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		getHomepage: function(id){
 			dispatch({
 				type: 'GET_HOME_PAGE',
-				payload: axios.get('http://localhost:8080/api/open-mics/homepage')
+				payload: axios.get('/api/open-mics/homepage')
 			});
 		}
 	}
