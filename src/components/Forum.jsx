@@ -28,7 +28,6 @@ const iconButtonElement = (
 
 class Forum extends Component {
 	render() {
-
 		// loader
 		if (this.props.forum.pending) {
 			return (<div style={{marginTop: '100px', textAlign: 'center'}}><CircularProgress size={130} thickness={20} /></div>);

@@ -5,7 +5,6 @@ import Subheader from 'material-ui/Subheader';
 import Avatar from 'material-ui/Avatar';
 
 const FollowerCard = (props) =>{
-
 	return (
 		<div>
 			<Card style={{marginBottom: '20px'}}>

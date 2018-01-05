@@ -7,7 +7,5 @@ module.exports = function(app){
 	app.get('/homepage', ctrl.getHomepage);
 	app.post('/search', ctrl.searchOpenMics);
 	app.get('/:id', ctrl.getOpenMicById);
-	app.put('/:id', ctrl.editOpenMic);
 	app.delete('/:id', ctrl.deleteOpenMic);
-
 }

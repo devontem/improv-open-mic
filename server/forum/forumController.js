@@ -101,43 +101,6 @@ module.exports.deletePost = function(req, res){
     });
 }
 
-module.exports.editPost = function(req, res){
-	var data = req.body;
-	var changes = [data.title, data.body, data.id];
- 
-    database.then(function(connection){
-
-    	connection.query('UPDATE `forum_posts` SET `title` = ?, `body` = ? WHERE id = ?', changes , function(err, results, fields) {
-            if (err) { 
-                res.status(400).send({ data: err });
-                return;
-            }
-
-            res.status(200).send({ data: results });
-        });
-    }).catch(catchErrors);
-
-    function catchErrors(err){ res.status(400).send({ data: err }); return; }
-}
-
-// module.exports.likePost = function(req, res){
-// 	var data = req.body;
-//     // async connection to database
-//     database.then(function(connection){
-//         // query database 
-//     	connection.query('INSERT INTO `A2_OPEN_MICS` SET ?', data , function(error, results, fields) {
-//             if (error) {
-//                 console.log(error);
-//                 res.status(400).send({ data: error });
-//                 return;
-//             }
-//             console.log('results', results);
-
-//             res.status(200).send({ data: results });
-//         });
-//     });
-// }
-
 module.exports.createPostReply = function(req, res){
 	var data = req.body;
     data.author_id = req.userId; // pulling user id from auth middleware
@@ -149,24 +112,6 @@ module.exports.createPostReply = function(req, res){
     database.then(function(connection){
 
     	connection.query('INSERT INTO `forum_replies` SET ?', data , function(err, results, fields) {
-            if (err) { 
-                res.status(400).send({ data: err });
-                return;
-            }
-
-            res.status(200).send({ data: results });
-        });
-    }).catch(catchErrors);
-
-    function catchErrors(err){ res.status(400).send({ data: err }); return; }
-}
-
-module.exports.editPostReply = function(req, res){
-	var data = req.body;
-	var changes = [data.body, data.id];
-
-    database.then(function(connection){ 
-    	connection.query('UPDATE `forum_replies` SET body = ? WHERE id = ?', changes, function(err, results, fields) {
             if (err) { 
                 res.status(400).send({ data: err });
                 return;

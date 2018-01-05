@@ -15,7 +15,7 @@ const Layout = (props) => {
 	var loggedIn = localStorage.getItem('imp-tok') && localStorage.getItem('imp-uid');
 	return (
 		<MuiThemeProvider>
-			<div>
+			<div style={{marginBottom: '100px'}}>
 				<AppBar
 				title={<a className="app-bar-title" style={{fontFamily: "'Open Sans', sans-serif", fontWeight: 'bold', color: 'white'}} href="/">Improv Jam Open Mics</a>}
 				iconElementLeft={<IconButton><HappyFaceIcon /></IconButton>}

@@ -61,37 +61,12 @@ module.exports.getOpenMicById = function(req, res){
 module.exports.createOpenMic = function(req, res){
 	var data = req.body;
 
+    // setting jam status to active upon creation
     data.active = 1;
     // async connection to database
     database.then(function(connection){
         // query database 
     	connection.query('INSERT INTO `open_mics` SET ?', data, function(error, results, fields) {
-            if (error) {
-                res.status(400).send({ data: error });
-                return;
-            }
-
-            res.status(200).send({ data: results });
-        });
-    });
-}
-
-module.exports.editOpenMic = function(req, res){
-	var data = req.body;
-	var changes = [ data['title'], 
-					data['venue_id'], 
-					data['day_of_week'], 
-					data['start_time'], 
-					data['end_time'], 
-					data['city'], 
-					data['country'], 
-					data['active'], 
-					data['id']];
-
-    // async connection to database
-    database.then(function(connection){
-        // query database 
-    	connection.query('UPDATE `open_mics` SET title = ?, venue_id = ?, day_of_week = ?, start_time = ?, end_time = ?, city = ?, country = ?, active = ? WHERE id = ?', changes, function(error, results, fields) {
             if (error) {
                 res.status(400).send({ data: error });
                 return;

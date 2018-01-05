@@ -144,16 +144,3 @@ module.exports.editUser = function(req, res){
         });
     });
 }
-
-module.exports.searchUsers = function(req, res){
-	var search = req.body.search;
-	// async connection to database
-    database.then(function(connection){
-        // query database 
-    	connection.query('SELECT * FROM `users` WHERE email LIKE %?%', [search], function(error, results, fields) {
-            if (err) res.status(400).send({ data: error });
-
-            res.status(200).send({ data: results });
-        });
-    });
-}

@@ -7,9 +7,7 @@ module.exports = function(app){
 	app.get('/tags', reviewsController.getAllTags);
 	app.get('/tags/used', reviewsController.getTagsFromReviews);
 	app.get('/:id', reviewsController.getReviewById);
-	app.put('/:id', checkAuth, reviewsController.editReview);
 	app.delete('/:id', checkAuth, reviewsController.deleteReview);
-	// app.post('/:id/like', reviewsController.likeReview);
 	app.post('/review-reply', checkAuth, reviewsController.createReviewReply);
 	app.delete('/review-reply/:id', checkAuth, reviewsController.deleteReviewReply);
 }

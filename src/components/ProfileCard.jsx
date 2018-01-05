@@ -15,8 +15,6 @@ class ProfileCard extends Component {
 		e.preventDefault();
 		var profileId = this.props.match.params.id;
 
-		console.log(this.props)
-
 		if (this.props.isFollowing){
 			this.props.unfollow({
 				follower: localStorage.getItem('imp-uid'),

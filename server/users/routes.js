@@ -8,5 +8,4 @@ module.exports = function(app) {
 	app.post('/unfollow', checkAuth, ctrl.unfollowUser);
 	app.get('/:id', ctrl.getUserById);
 	app.put('/:id', checkAuth, ctrl.editUser);
-	app.get('/search', ctrl.searchUsers);
 }

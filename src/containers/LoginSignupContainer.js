@@ -22,14 +22,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 			dispatch({
 				type: 'SIGN_UP',
 				payload: axios.post('http://localhost:8080/api/auth/signup', form)
-			})
-			// // getting new comments after submit
-			// .then(() => {
-			// 	dispatch({
-			// 		type: 'GET_THREAD_POST',
-			// 		payload: axios.get('http://localhost:8080/api/forum/' + form.parent_post_id)
-			// 	});
-			// });
+			});
 		}
 	}
 };
