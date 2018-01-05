@@ -8,13 +8,14 @@
 
 ### Keys
 - `PROD: 1`
-- `secret: ${placeholder}` Can be anything
+- `secret: ${placeholder}` - Can be anything
 - `database: ${mysql_database}`
 - `user: ${mysql_user}`
 - `password: ${mysql_password}`
 - `port: ${mysql_port}`
 - `secret: ${placeholder}`
-- `authKey: ${token_login_secret_}` Can be anything
+- `authKey: ${token_login_secret}` - Can be anything
+= `PUBLIC_URL: ${site_hostname}`
 
 # React Create App
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
