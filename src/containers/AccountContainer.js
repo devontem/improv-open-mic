@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import Account from "./../components/Account.jsx";
+import swal from 'sweetalert';
 
 const mapStateToProps = (state, ownProps) => {
 	return {
@@ -23,6 +24,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 				payload: axios.put('http://localhost:8080/api/users/' + id, form, {
 					headers: {'x-access-token': localStorage.getItem('imp-tok') }
 				})
+			})
+			.then(()=>{
+				swal("Success!", "Your credentials have been updated!", "success");
+			})
+			.catch(()=>{
+				swal("There was an error!", "Your credentials were not updated, please try again later.", "error");
 			});
 		}
 	}

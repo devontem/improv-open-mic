@@ -1,7 +1,5 @@
 var database = require('./../db/database');
 var hashPassword = require('./../helpers/helpers').hashPassword;
-// add friends
-// add memberships
 
 module.exports.getUserById = function(req, res){
 	var id = req.params.id;

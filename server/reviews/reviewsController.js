@@ -1,6 +1,6 @@
 var database = require('./../db/database');
 var uploadImages = require('./../helpers/helpers').uploadImages;
-var PLACEHOLDER_IMG = 'https://s3-ap-southeast-1.amazonaws.com/creasi/production/articles/172/LGYyoz52fP0zOhszjTFY8Z5xn95UFLnEh5wXZ.jpg';
+var PLACEHOLDER_IMG = '/images/review.jpg';
 
 module.exports.getReviews = function(req, res){
 	// add query param to get for a specific venue_id and for all (homepage)

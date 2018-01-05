@@ -11,6 +11,7 @@ import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Card, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
+import CircularProgress from 'material-ui/CircularProgress';
 
 const iconButtonElement = (
   <IconButton
@@ -42,6 +43,12 @@ class Review extends Component {
 
 	render() {
 		var imgUrl = (this.props.review.review) ? this.props.review.review.photo : '';
+
+		// loader
+		if (this.props.review.pending) {
+			return (<div style={{marginTop: '100px', textAlign: 'center'}}><CircularProgress size={130} thickness={20} /></div>);
+		}
+
 		return (
 			<div>
 				{this.props.review.error && <Alert error={true} message={this.props.review.errorMessage} />}

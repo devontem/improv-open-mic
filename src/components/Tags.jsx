@@ -6,6 +6,7 @@ import Chip from 'material-ui/Chip';
 import {ListItem} from 'material-ui/List';
 import ActionHome from 'material-ui/svg-icons/action/home';
 import NavigationChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
+import CircularProgress from 'material-ui/CircularProgress';
 
 const chipStyles = {
 	margin: '4px',
@@ -36,6 +37,12 @@ class Tags extends Component {
 
 	render(){
 		var tags = (this.props.tags.usedTags) ? this.sortTags(this.props.tags.usedTags) : {};
+
+		// loader
+		if (this.props.tags.pending) {
+			return (<div style={{marginTop: '100px', textAlign: 'center'}}><CircularProgress size={130} thickness={20} /></div>);
+		}
+
 		return (
 			<div>
 				{ Object.keys(tags) && 

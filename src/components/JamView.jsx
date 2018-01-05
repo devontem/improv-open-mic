@@ -3,6 +3,7 @@ import {List, ListItem} from 'material-ui/List';
 import SocialPublic from 'material-ui/svg-icons/social/public';
 import NavigationChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
 import {Card, CardTitle} from 'material-ui/Card';
+import CircularProgress from 'material-ui/CircularProgress';
 
 const JamView = (props) => {
 	let countries = {},
@@ -29,6 +30,11 @@ const JamView = (props) => {
 		});
 	} else {
 		jams_result = jams.map((item) => (<ListItem primaryText={item.title} leftIcon={<NavigationChevronRight />} key={item.id} href={`/jams/id/${item.id}`} />));
+	}
+
+	// loader
+	if (props.openMics.pending) {
+		return (<div style={{marginTop: '100px', textAlign: 'center'}}><CircularProgress size={130} thickness={20} /></div>);
 	}
 
 	return (

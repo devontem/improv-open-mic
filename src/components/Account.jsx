@@ -4,6 +4,7 @@ import Card from 'material-ui/Card';
 import Subheader from 'material-ui/Subheader';
 import RaisedButton from 'material-ui/RaisedButton';
 import swal from 'sweetalert';
+import CircularProgress from 'material-ui/CircularProgress';
 
 class Account extends Component {
 	handleSubmit(e){
@@ -28,6 +29,10 @@ class Account extends Component {
 	}
 
 	render(){
+		// loader
+		if (this.props.profile.pending) {
+			return (<div style={{marginTop: '100px', textAlign: 'center'}}><CircularProgress size={130} thickness={20} /></div>);
+		}
 
 		return (
 			<div>

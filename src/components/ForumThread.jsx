@@ -12,6 +12,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
+import CircularProgress from 'material-ui/CircularProgress';
 
 const iconButtonElement = (
   <IconButton
@@ -49,6 +50,11 @@ class ForumThread extends Component {
 	}
 
 	render(){
+		// loader
+		if (this.props.forum.pending) {
+			return (<div style={{marginTop: '100px', textAlign: 'center'}}><CircularProgress size={130} thickness={20} /></div>);
+		}
+
 		return (
 			<div>
 				{this.props.forum.error && <Alert error={true} message={this.props.forum.errorMessage} />}

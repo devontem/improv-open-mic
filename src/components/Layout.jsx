@@ -17,7 +17,7 @@ const Layout = (props) => {
 		<MuiThemeProvider>
 			<div>
 				<AppBar
-				title={<a className="app-bar-title" style={{fontFamily: "'Open Sans', sans-serif", fontWeight: 'bold'}} href="/">Improv Jam Open Mics</a>}
+				title={<a className="app-bar-title" style={{fontFamily: "'Open Sans', sans-serif", fontWeight: 'bold', color: 'white'}} href="/">Improv Jam Open Mics</a>}
 				iconElementLeft={<IconButton><HappyFaceIcon /></IconButton>}
 				iconElementRight={loggedIn ? <Logged {...this.props} /> : <Login />}
 				/>

@@ -13,6 +13,7 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import ContentAddBox from 'material-ui/svg-icons/content/add-box';
 import RaisedButton from 'material-ui/RaisedButton';
+import CircularProgress from 'material-ui/CircularProgress';
 
 
 const iconButtonElement = (
@@ -27,7 +28,12 @@ const iconButtonElement = (
 
 class Forum extends Component {
 	render() {
-		console.log(this.props.forum);
+
+		// loader
+		if (this.props.forum.pending) {
+			return (<div style={{marginTop: '100px', textAlign: 'center'}}><CircularProgress size={130} thickness={20} /></div>);
+		}
+
 		return (
 			<div>
 				{this.props.forum.error && <Alert error={true} message={this.props.forum.errorMessage} />}

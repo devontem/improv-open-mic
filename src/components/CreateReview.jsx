@@ -10,6 +10,7 @@ import Dropzone from 'react-dropzone';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import swal from 'sweetalert';
+import CircularProgress from 'material-ui/CircularProgress';
 
 class CreateReview extends Component {
 	componentWillMount(){
@@ -77,6 +78,11 @@ class CreateReview extends Component {
 		}
 		if (this.props.review.error) swal("Error!", "There was a problem with your submission. Please try again later.", "error");
 		if (this.props.openMics.error || this.props.tags.error ) swal("Error!", "There was a problem with this request. Please try again later.", "error");
+
+		// loader
+		if (this.props.openMics.pending || this.props.tags.pending) {
+			return (<div style={{marginTop: '100px', textAlign: 'center'}}><CircularProgress size={130} thickness={20} /></div>);
+		}
 
 		return (
 			<div>

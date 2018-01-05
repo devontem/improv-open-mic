@@ -17,6 +17,7 @@ import {
 } from 'material-ui/Table';
 import {GridList, GridTile} from 'material-ui/GridList';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+import CircularProgress from 'material-ui/CircularProgress';
 
 const styles = {
   root: {
@@ -55,6 +56,11 @@ const nestedItem = (item) => {
 
 class Jam extends Component {
 	render() {
+		// loader
+		if (this.props.openMics.pending) {
+			return (<div style={{marginTop: '100px', textAlign: 'center'}}><CircularProgress size={130} thickness={20} /></div>);
+		}
+
 		return (
 			<div>
 				{this.props.review.error && <Alert error={true} message={this.props.review.errorMessage} />}
