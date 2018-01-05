@@ -31,6 +31,7 @@ module.exports = function(app, express){
 	app.use(fileUpload());
 
 	// serving static files
+	app.use(express.static(path.resolve(__dirname, '..', '..' , 'public')));
 	app.use(express.static(path.resolve(__dirname, '..', '..' , 'build')));
 
 	// colored/detailed server logs
