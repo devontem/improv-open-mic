@@ -1,6 +1,6 @@
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
-var config = require('./config');
+var config = (process.env && process.env.PROD) ? process.env : require('./config');
 var path = require('path');
 var fileUpload = require('express-fileupload');
 
