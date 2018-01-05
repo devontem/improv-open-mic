@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 let middleware;
 
 // setting up middleware
-if (process.env.NPM_CONFIG_PRODUCTION){
+if (process.env.PROD){
 	middleware = applyMiddleware(promise(), thunk)
 } else {
 	middleware = applyMiddleware(promise(), thunk, logger)
