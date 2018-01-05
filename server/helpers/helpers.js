@@ -2,7 +2,7 @@ var bcrypt = require('bcrypt');
 var fs = require('fs');
 var path = require('path')
 var jwt = require('jsonwebtoken');
-var config = (process.env && process.env.PROD) ? process.env : require('./config/config');
+var config = (process.env && process.env.PROD) ? process.env : require('./../config/config');
 
 var MIME_TYPES = {
 	'image/gif': '.gif', 
