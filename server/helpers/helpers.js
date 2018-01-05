@@ -35,14 +35,20 @@ module.exports.uploadImages = function(req){
 	    // The name of the input field for the file
 	    var file = req.files.photo;
 	    var file_name = getHash() + getFileType(file.mimetype);
+	    var origin = (process.env.PROD) ? './build' : './public'; // depeneding on prod or local dev
 	    var destination_path = '/image_uploads/' + file_name;
 
 	    // Use the mv() method to place the file somewhere on your server
-	    file.mv('./public' + destination_path, function(err) {
+	    file.mv('./build' + destination_path, function(err) {
 	        if (err)
 	          reject(null);
 
-	        resolve(destination_path);
+	        file.mv('./public' + destination_path, function(err1) {
+		        if (err1)
+		          reject(null);
+
+		        resolve(destination_path);
+		    });
 	    });
 	});
 
