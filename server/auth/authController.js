@@ -3,8 +3,10 @@ var checkPassword = require('./../helpers/helpers').checkPassword;
 var hashPassword = require('./../helpers/helpers').hashPassword;
 var uploadImages = require('./../helpers/helpers').uploadImages;
 var database = require('./../db/database');
-var config = (process.env && process.env.authKey) ? process.env : require('./../config/config');
+var config = (process.env && process.env.PROD) ? process.env : require('./../config/config');
 var PLACEHOLDER_IMG = '/images/avatar.jpg';
+console.log('prod?' process.env.PROD);
+console.log('process.env', process.env);
 
 module.exports.login = function(req, res) {
     var email = req.body.email.toLowerCase();

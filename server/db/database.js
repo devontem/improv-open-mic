@@ -1,7 +1,7 @@
 var mysql = require('mysql2');
 var Client = require('ssh2').Client;
 var ssh = new Client();
-var keys = (process.env && process.env.password) ? process.env : require('./../config/config');
+var keys = (process.env && process.env.PROD) ? process.env : require('./../config/config');
 var db_env = (process.env && process.env.DB_ENV) ? process.env.DB_ENV : 'herts';
 var db;
 
