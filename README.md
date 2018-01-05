@@ -1,3 +1,22 @@
+# Improv Jam Open Mics
+- This application was built with React, Redux, Node, & Express
+- It allows people in the improv comedy community to share ideas, connect with eachother, and leave reviews on improv open mics they have attended or are interested in attending.
+
+## App Specific Requirements
+- For Dev Usage: Must have either a config.js file within `server/config` directory that exports the following keys for local development
+- For Prod Usage: set your environment variables with the following keys
+
+### Keys
+- `PROD: 1`
+- `secret: ${placeholder}` Can be anything
+- `database: ${mysql_database}`
+- `user: ${mysql_user}`
+- `password: ${mysql_password}`
+- `port: ${mysql_port}`
+- `secret: ${placeholder}`
+- `authKey: ${token_login_secret_}` Can be anything
+
+# React Create App
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
